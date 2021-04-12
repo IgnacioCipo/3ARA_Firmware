@@ -1,0 +1,4 @@
+Motor.cpp:4:1:Motor::Motor(TIM_HandleTypeDef, uint16_t, uint16_t)	16	static
+Motor.cpp:8:6:void turnLef(uint32_t)	16	static
+Motor.cpp:12:6:void turnRight(uint32_t)	16	static
+Motor.cpp:16:6:void goHomePosition()	4	static
