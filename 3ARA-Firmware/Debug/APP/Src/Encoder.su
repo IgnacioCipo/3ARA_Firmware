@@ -1,0 +1,3 @@
+Encoder.cpp:3:1:Encoder::Encoder(TIM_HandleTypeDef*, float)	24	static
+Encoder.cpp:9:7:float Encoder::getAngle()	16	static
+Encoder.cpp:14:7:float Encoder::getPulses()	16	static

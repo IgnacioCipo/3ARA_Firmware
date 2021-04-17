@@ -1,0 +1,7 @@
+3ARAInfo.c:10:6:robotInfoInit	16	static
+3ARAInfo.c:17:6:setAngle1	16	static
+3ARAInfo.c:23:6:setAngle2	16	static
+3ARAInfo.c:29:6:setAngle3	16	static
+3ARAInfo.c:35:6:getAngle1	16	static
+3ARAInfo.c:41:6:getAngle2	16	static
+3ARAInfo.c:47:6:getAngle3	16	static

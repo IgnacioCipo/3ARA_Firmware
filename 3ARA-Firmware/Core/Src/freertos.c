@@ -27,7 +27,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "3ARAEntrypoint.h"
-
+#include "3ARAInfo.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -47,6 +47,7 @@
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN Variables */
+RobotInfoHandler robot_info_handler;
 
 /* USER CODE END Variables */
 osThreadId defaultTaskHandle;
@@ -54,6 +55,7 @@ osThreadId taskPID1Handle;
 osThreadId taskPID2Handle;
 osThreadId taskPID3Handle;
 osThreadId ROSCommsHandle;
+osMutexId mutexHandle;
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
@@ -93,6 +95,10 @@ void MX_FREERTOS_Init(void) {
   /* USER CODE BEGIN Init */
 
   /* USER CODE END Init */
+  /* Create the mutex(es) */
+  /* definition and creation of mutex */
+  osMutexDef(mutex);
+  mutexHandle = osMutexCreate(osMutex(mutex));
 
   /* USER CODE BEGIN RTOS_MUTEX */
   /* add mutexes, ... */
@@ -166,6 +172,7 @@ void StartDefaultTask(void const * argument)
 void startPID1(void const * argument)
 {
   /* USER CODE BEGIN startPID1 */
+	PID1Node(&robot_info_handler);
   /* Infinite loop */
   for(;;)
   {
@@ -187,7 +194,7 @@ void startPID2(void const * argument)
   /* Infinite loop */
   for(;;)
   {
-    osDelay(1);
+    osDelay(1000);
   }
   /* USER CODE END startPID2 */
 }
@@ -205,7 +212,7 @@ void startPID3(void const * argument)
   /* Infinite loop */
   for(;;)
   {
-    osDelay(1);
+    osDelay(1000);
   }
   /* USER CODE END startPID3 */
 }
@@ -220,8 +227,8 @@ void startPID3(void const * argument)
 void startROSComms(void const * argument)
 {
   /* USER CODE BEGIN startROSComms */
-
-	startROSSerialComms();
+	robotInfoInit(&robot_info_handler, &mutexHandle);
+	startROSSerialComms(&robot_info_handler);
   /* Infinite loop */
   for(;;)
   {

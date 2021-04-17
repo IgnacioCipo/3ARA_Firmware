@@ -1,5 +1,6 @@
 "APP/Inc/ROSSerial/duration.o"
 "APP/Inc/ROSSerial/time.o"
+"APP/Src/3ARAInfo.o"
 "APP/Src/Encoder.o"
 "APP/Src/Motor.o"
 "APP/Src/Task/PID/PID.o"

@@ -44,7 +44,9 @@ Core/Src/freertos.o: ../Core/Src/freertos.c \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h \
- G:/Repositorios/3ARA_Firmware/3ARA-Firmware/APP/Inc/3ARAEntrypoint.h
+ G:/Repositorios/3ARA_Firmware/3ARA-Firmware/APP/Inc/3ARAEntrypoint.h \
+ G:/Repositorios/3ARA_Firmware/3ARA-Firmware/APP/Inc/3ARAInfo.h \
+ G:/Repositorios/3ARA_Firmware/3ARA-Firmware/APP/Inc/3ARAInfo.h
 
 ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h:
 
@@ -139,3 +141,7 @@ Core/Src/freertos.o: ../Core/Src/freertos.c \
 ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h:
 
 G:/Repositorios/3ARA_Firmware/3ARA-Firmware/APP/Inc/3ARAEntrypoint.h:
+
+G:/Repositorios/3ARA_Firmware/3ARA-Firmware/APP/Inc/3ARAInfo.h:
+
+G:/Repositorios/3ARA_Firmware/3ARA-Firmware/APP/Inc/3ARAInfo.h:
