@@ -7,8 +7,10 @@
 extern "C" {
 #endif
 
-void startROSSerialComms(RobotInfoHandler *info_handler);
+void startSerialComms(RobotInfoHandler *info_handler);
 void PID1Node(RobotInfoHandler *robot_info_handler);
+void PID2Node(RobotInfoHandler *robot_info_handler);
+void PID3Node(RobotInfoHandler *robot_info_handler);
 
 #ifdef __cplusplus
 }

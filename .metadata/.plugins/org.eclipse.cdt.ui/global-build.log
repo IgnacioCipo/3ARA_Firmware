@@ -1,0 +1,65 @@
+16:16:05 **** Incremental Build of configuration Debug for project 3ARA-Firmware ****
+make -j4 all 
+arm-none-eabi-g++ "../APP/Src/Task/PID/PID1.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DDEBUG -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -I"G:/Repositorios/3ARA_Firmware/3ARA-Firmware/APP/Inc" -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"APP/Src/Task/PID/PID1.d" -MT"APP/Src/Task/PID/PID1.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "APP/Src/Task/PID/PID1.o"
+arm-none-eabi-g++ "../APP/Src/Task/Comms/SerialComms.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DDEBUG -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -I"G:/Repositorios/3ARA_Firmware/3ARA-Firmware/APP/Inc" -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"APP/Src/Task/Comms/SerialComms.d" -MT"APP/Src/Task/Comms/SerialComms.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "APP/Src/Task/Comms/SerialComms.o"
+../APP/Src/Task/Comms/SerialComms.cpp:19:36: warning: 'test_angle' defined but not used [-Wunused-variable]
+ }angle_1, angle_2, angle_3, ticks, test_angle;
+                                    ^~~~~~~~~~
+../APP/Src/Task/Comms/SerialComms.cpp:19:2: warning: 'angle_1' defined but not used [-Wunused-variable]
+ }angle_1, angle_2, angle_3, ticks, test_angle;
+  ^~~~~~~
+arm-none-eabi-g++ -o "3ARA-Firmware.elf" @"objects.list"   -mcpu=cortex-m4 -T"G:\Repositorios\3ARA_Firmware\3ARA-Firmware\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="3ARA-Firmware.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: 3ARA-Firmware.elf
+ 
+arm-none-eabi-objdump -h -S  3ARA-Firmware.elf  > "3ARA-Firmware.list"
+arm-none-eabi-objcopy  -O binary  3ARA-Firmware.elf  "3ARA-Firmware.bin"
+arm-none-eabi-size   3ARA-Firmware.elf 
+   text	   data	    bss	    dec	    hex	filename
+  27092	     28	  18196	  45316	   b104	3ARA-Firmware.elf
+Finished building: default.size.stdout
+ 
+Finished building: 3ARA-Firmware.bin
+ 
+Finished building: 3ARA-Firmware.list
+ 
+16:20:38 **** Incremental Build of configuration Debug for project 3ARA-Firmware ****
+make -j4 all 
+arm-none-eabi-size   3ARA-Firmware.elf 
+   text	   data	    bss	    dec	    hex	filename
+  27092	     28	  18196	  45316	   b104	3ARA-Firmware.elf
+Finished building: default.size.stdout
+ 
+16:26:56 **** Incremental Build of configuration Debug for project 3ARA-Firmware ****
+make -j4 all 
+arm-none-eabi-g++ "../APP/Src/Task/PID/PID1.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DDEBUG -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -I"G:/Repositorios/3ARA_Firmware/3ARA-Firmware/APP/Inc" -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"APP/Src/Task/PID/PID1.d" -MT"APP/Src/Task/PID/PID1.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "APP/Src/Task/PID/PID1.o"
+arm-none-eabi-g++ -o "3ARA-Firmware.elf" @"objects.list"   -mcpu=cortex-m4 -T"G:\Repositorios\3ARA_Firmware\3ARA-Firmware\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="3ARA-Firmware.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: 3ARA-Firmware.elf
+ 
+arm-none-eabi-objdump -h -S  3ARA-Firmware.elf  > "3ARA-Firmware.list"
+arm-none-eabi-objcopy  -O binary  3ARA-Firmware.elf  "3ARA-Firmware.bin"
+arm-none-eabi-size   3ARA-Firmware.elf 
+   text	   data	    bss	    dec	    hex	filename
+  26724	     28	  18196	  44948	   af94	3ARA-Firmware.elf
+Finished building: default.size.stdout
+ 
+Finished building: 3ARA-Firmware.bin
+ 
+Finished building: 3ARA-Firmware.list
+ 
+16:29:13 **** Incremental Build of configuration Debug for project 3ARA-Firmware ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/freertos.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DDEBUG -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -I"G:/Repositorios/3ARA_Firmware/3ARA-Firmware/APP/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/freertos.d" -MT"Core/Src/freertos.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/freertos.o"
+arm-none-eabi-g++ -o "3ARA-Firmware.elf" @"objects.list"   -mcpu=cortex-m4 -T"G:\Repositorios\3ARA_Firmware\3ARA-Firmware\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="3ARA-Firmware.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: 3ARA-Firmware.elf
+ 
+arm-none-eabi-objdump -h -S  3ARA-Firmware.elf  > "3ARA-Firmware.list"
+arm-none-eabi-objcopy  -O binary  3ARA-Firmware.elf  "3ARA-Firmware.bin"
+arm-none-eabi-size   3ARA-Firmware.elf 
+   text	   data	    bss	    dec	    hex	filename
+  26788	     28	  18196	  45012	   afd4	3ARA-Firmware.elf
+Finished building: default.size.stdout
+Finished building: 3ARA-Firmware.bin
+ 
+ 
+Finished building: 3ARA-Firmware.list
+ 

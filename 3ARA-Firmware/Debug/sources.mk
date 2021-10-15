@@ -1,5 +1,6 @@
 ################################################################################
 # Automatically-generated file. Do not edit!
+# Toolchain: GNU Tools for STM32 (9-2020-q2-update)
 ################################################################################
 
 ELF_SRCS := 
@@ -29,12 +30,21 @@ CPP_DEPS :=
 
 # Every subdirectory with source files must be described here
 SUBDIRS := \
-APP/Inc/ROSSerial \
 APP/Src \
+APP/Src/Task/Comms \
 APP/Src/Task/PID \
-APP/Src/Task/ROSComms \
 Core/Src \
 Core/Startup \
+Drivers/CMSIS/DSP/Source/BasicMathFunctions \
+Drivers/CMSIS/DSP/Source/CommonTables \
+Drivers/CMSIS/DSP/Source/ComplexMathFunctions \
+Drivers/CMSIS/DSP/Source/ControllerFunctions \
+Drivers/CMSIS/DSP/Source/FastMathFunctions \
+Drivers/CMSIS/DSP/Source/FilteringFunctions \
+Drivers/CMSIS/DSP/Source/MatrixFunctions \
+Drivers/CMSIS/DSP/Source/StatisticsFunctions \
+Drivers/CMSIS/DSP/Source/SupportFunctions \
+Drivers/CMSIS/DSP/Source/TransformFunctions \
 Drivers/STM32F4xx_HAL_Driver/Src \
 Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS \
 Middlewares/Third_Party/FreeRTOS/Source \

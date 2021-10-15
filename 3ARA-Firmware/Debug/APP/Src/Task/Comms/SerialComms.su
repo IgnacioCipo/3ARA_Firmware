@@ -1,0 +1,2 @@
+SerialComms.cpp:30:6:void startSerialComms(RobotInfoHandler*)	16	static
+SerialComms.cpp:68:6:void HAL_UART_RxCpltCallback(UART_HandleTypeDef*)	16	static

@@ -130,11 +130,11 @@ void MX_FREERTOS_Init(void) {
   taskPID2Handle = osThreadCreate(osThread(taskPID2), NULL);
 
   /* definition and creation of taskPID3 */
-  osThreadDef(taskPID3, startPID3, osPriorityIdle, 0, 512);
+  osThreadDef(taskPID3, startPID3, osPriorityNormal, 0, 512);
   taskPID3Handle = osThreadCreate(osThread(taskPID3), NULL);
 
   /* definition and creation of ROSComms */
-  osThreadDef(ROSComms, startROSComms, osPriorityIdle, 0, 1024);
+  osThreadDef(ROSComms, startROSComms, osPriorityNormal, 0, 1024);
   ROSCommsHandle = osThreadCreate(osThread(ROSComms), NULL);
 
   /* USER CODE BEGIN RTOS_THREADS */
@@ -157,7 +157,7 @@ void StartDefaultTask(void const * argument)
   for(;;)
   {
 	HAL_GPIO_TogglePin(LED_2_GPIO_Port, LED_2_Pin);
-    osDelay(2500);
+    osDelay(3000);
   }
   /* USER CODE END StartDefaultTask */
 }
@@ -191,6 +191,7 @@ void startPID1(void const * argument)
 void startPID2(void const * argument)
 {
   /* USER CODE BEGIN startPID2 */
+	PID2Node(&robot_info_handler);
   /* Infinite loop */
   for(;;)
   {
@@ -209,6 +210,7 @@ void startPID2(void const * argument)
 void startPID3(void const * argument)
 {
   /* USER CODE BEGIN startPID3 */
+	//PID3Node(&robot_info_handler);
   /* Infinite loop */
   for(;;)
   {
@@ -228,7 +230,7 @@ void startROSComms(void const * argument)
 {
   /* USER CODE BEGIN startROSComms */
 	robotInfoInit(&robot_info_handler, &mutexHandle);
-	startROSSerialComms(&robot_info_handler);
+	startSerialComms(&robot_info_handler);
   /* Infinite loop */
   for(;;)
   {

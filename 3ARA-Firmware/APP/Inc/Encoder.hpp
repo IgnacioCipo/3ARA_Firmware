@@ -11,11 +11,12 @@ class Encoder{
 		Encoder(TIM_HandleTypeDef* encoder_timer, float count_per_turn);
 		float getAngle();
 		float getPulses();
+		void resetTicksCounter();
 
 	private:
 		TIM_HandleTypeDef* timer;
 
-		float angle;
+		float angle, ticks;
 		float encoder_resolution;
 };
 

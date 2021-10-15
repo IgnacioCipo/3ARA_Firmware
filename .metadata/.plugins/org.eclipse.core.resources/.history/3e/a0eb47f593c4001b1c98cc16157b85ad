@@ -1,0 +1,44 @@
+#include "3ARAEntrypoint.h"
+#include "main.h"
+#include "Task/PID/PID.hpp"
+#include "Motor.hpp"
+#include "Encoder.hpp"
+#include "Settings.h"
+
+void PID1Node(RobotInfoHandler *robot_info_handler){
+
+	// Pin definition for motor 1
+	Pin motor_1_a{MOTOR_1_L_GPIO_Port, MOTOR_1_L_Pin};
+	Pin motor_1_b{MOTOR_1_R_GPIO_Port, MOTOR_1_R_Pin};
+
+	// Timer definition for motor 1
+	MotorChannel motor_1_timer{&MOTOR_1_TIMER, MOTOR_1_CHANNEL};
+
+	// Motor 1 object definition
+	Motor motor1(motor_1_timer, motor_1_a, motor_1_b);
+
+	// Encoder 1 object definition
+	Encoder encoder1(&ENCODER_1_TIMER, ENCODER_STEPS);
+
+	// PID 1 object definition
+	PID pid1(KP_CONST, KD_CONST, KI_CONST, MAX_PID_OUTPUT, MIN_PID_OUTPUT, PID_UPDATE_TIME_S);
+
+	float output_pid_1=0;
+	float  current_angle = 0;
+
+
+	while(1){
+
+		/*
+		current_angle = encoder1.getAngle();
+		output_pid_1 = pid1.updatePID(90.0, current_angle);
+		if(output_pid_1 > 0) motor1.turnRight(output_pid_1);
+		else motor1.turnLeft(-output_pid_1);
+		*/
+		if(HAL_GPIO_ReadPin(HALL_SENSOR_1_GPIO_Port, HALL_SENSOR_1_Pin) == GPIO_PIN_SET) motor1.turnLeft(1000);
+		else motor1.turnRight(1000);
+
+		//robot_info_handler->angle_1 = encoder1.getAngle();
+		osDelay(PID_UPDATE_TIME_mS);
+	}
+}

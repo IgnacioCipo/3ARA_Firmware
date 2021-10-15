@@ -1,5 +1,6 @@
 ################################################################################
 # Automatically-generated file. Do not edit!
+# Toolchain: GNU Tools for STM32 (9-2020-q2-update)
 ################################################################################
 
 -include ../makefile.init
@@ -13,12 +14,21 @@ RM := rm -rf
 -include Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/subdir.mk
 -include Middlewares/Third_Party/FreeRTOS/Source/subdir.mk
 -include Drivers/STM32F4xx_HAL_Driver/Src/subdir.mk
+-include Drivers/CMSIS/DSP/Source/TransformFunctions/subdir.mk
+-include Drivers/CMSIS/DSP/Source/SupportFunctions/subdir.mk
+-include Drivers/CMSIS/DSP/Source/StatisticsFunctions/subdir.mk
+-include Drivers/CMSIS/DSP/Source/MatrixFunctions/subdir.mk
+-include Drivers/CMSIS/DSP/Source/FilteringFunctions/subdir.mk
+-include Drivers/CMSIS/DSP/Source/FastMathFunctions/subdir.mk
+-include Drivers/CMSIS/DSP/Source/ControllerFunctions/subdir.mk
+-include Drivers/CMSIS/DSP/Source/ComplexMathFunctions/subdir.mk
+-include Drivers/CMSIS/DSP/Source/CommonTables/subdir.mk
+-include Drivers/CMSIS/DSP/Source/BasicMathFunctions/subdir.mk
 -include Core/Startup/subdir.mk
 -include Core/Src/subdir.mk
--include APP/Src/Task/ROSComms/subdir.mk
 -include APP/Src/Task/PID/subdir.mk
+-include APP/Src/Task/Comms/subdir.mk
 -include APP/Src/subdir.mk
--include APP/Inc/ROSSerial/subdir.mk
 -include subdir.mk
 -include objects.mk
 
@@ -51,6 +61,17 @@ endif
 
 -include ../makefile.defs
 
+OPTIONAL_TOOL_DEPS := \
+$(wildcard ../makefile.defs) \
+$(wildcard ../makefile.init) \
+$(wildcard ../makefile.targets) \
+
+
+BUILD_ARTIFACT_NAME := 3ARA-Firmware
+BUILD_ARTIFACT_EXTENSION := elf
+BUILD_ARTIFACT_PREFIX := 
+BUILD_ARTIFACT := $(BUILD_ARTIFACT_PREFIX)$(BUILD_ARTIFACT_NAME).$(BUILD_ARTIFACT_EXTENSION)
+
 # Add inputs and outputs from these tool invocations to the build variables 
 EXECUTABLES += \
 3ARA-Firmware.elf \
@@ -66,25 +87,28 @@ OBJCOPY_BIN += \
 
 
 # All Target
-all: 3ARA-Firmware.elf secondary-outputs
+all: main-build
+
+# Main-build Target
+main-build: 3ARA-Firmware.elf secondary-outputs
 
 # Tool invocations
-3ARA-Firmware.elf: $(OBJS) $(USER_OBJS) G:\Repositorios\3ARA_Firmware\3ARA-Firmware\STM32F407VGTX_FLASH.ld
+3ARA-Firmware.elf: $(OBJS) $(USER_OBJS) G:\Repositorios\3ARA_Firmware\3ARA-Firmware\STM32F407VGTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
 	arm-none-eabi-g++ -o "3ARA-Firmware.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"G:\Repositorios\3ARA_Firmware\3ARA-Firmware\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="3ARA-Firmware.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
-default.size.stdout: $(EXECUTABLES)
+default.size.stdout: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
 	arm-none-eabi-size  $(EXECUTABLES)
 	@echo 'Finished building: $@'
 	@echo ' '
 
-3ARA-Firmware.list: $(EXECUTABLES)
+3ARA-Firmware.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
 	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "3ARA-Firmware.list"
 	@echo 'Finished building: $@'
 	@echo ' '
 
-3ARA-Firmware.bin: $(EXECUTABLES)
+3ARA-Firmware.bin: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
 	arm-none-eabi-objcopy  -O binary $(EXECUTABLES) "3ARA-Firmware.bin"
 	@echo 'Finished building: $@'
 	@echo ' '
@@ -96,7 +120,14 @@ clean:
 
 secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST) $(OBJCOPY_BIN)
 
-.PHONY: all clean dependents
+fail-specified-linker-script-missing:
+	@echo 'Error: Cannot find the specified linker script. Check the linker settings in the build configuration.'
+	@exit 2
+
+warn-no-linker-script-specified:
+	@echo 'Warning: No linker script specified. Check the linker settings in the build configuration.'
+
+.PHONY: all clean dependents fail-specified-linker-script-missing warn-no-linker-script-specified
 .SECONDARY:
 
 -include ../makefile.targets

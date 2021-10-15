@@ -12,6 +12,7 @@ void robotInfoInit(RobotInfoHandler *info_handler, osMutexId *mutex){
 	info_handler->angle_1 = 0;
 	info_handler->angle_2 = 0;
 	info_handler->angle_3 = 0;
+	info_handler->ticks = 0;
 }
 
 void setAngle1(RobotInfoHandler *info_handler, float angle){
@@ -20,34 +21,37 @@ void setAngle1(RobotInfoHandler *info_handler, float angle){
 	osMutexRelease(*(info_handler->mutexHandler));
 }
 
-void setAngle2(RobotInfoHandler *info_handler){
+void setAngle2(RobotInfoHandler *info_handler, float angle){
 	osMutexWait(*(info_handler->mutexHandler), osWaitForever);
-
+	info_handler->angle_2 = angle;
 	osMutexRelease(*(info_handler->mutexHandler));
 }
 
-void setAngle3(RobotInfoHandler *info_handler){
+void setAngle3(RobotInfoHandler *info_handler, float angle){
 	osMutexWait(*(info_handler->mutexHandler), osWaitForever);
-
+	info_handler->angle_3 = angle;
 	osMutexRelease(*(info_handler->mutexHandler));
 }
 
-void getAngle1(RobotInfoHandler *info_handler){
+float getAngle1(RobotInfoHandler *info_handler){
 	osMutexWait(*(info_handler->mutexHandler), osWaitForever);
-
+	float angle = info_handler->angle_1;
 	osMutexRelease(*(info_handler->mutexHandler));
+	return angle;
 }
 
-void getAngle2(RobotInfoHandler *info_handler){
+float getAngle2(RobotInfoHandler *info_handler){
 	osMutexWait(*(info_handler->mutexHandler), osWaitForever);
-
+	float angle = info_handler->angle_2;
 	osMutexRelease(*(info_handler->mutexHandler));
+	return angle;
 }
 
-void getAngle3(RobotInfoHandler *info_handler){
+float getAngle3(RobotInfoHandler *info_handler){
 	osMutexWait(*(info_handler->mutexHandler), osWaitForever);
-
+	float angle = info_handler->angle_3;
 	osMutexRelease(*(info_handler->mutexHandler));
+	return angle;
 }
 
 
