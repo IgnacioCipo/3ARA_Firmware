@@ -34,13 +34,13 @@
 #define KD_CONST_2 1
 #define KP_CONST_2 800
 // PID 3 ctes
-#define KI_CONST_3 10
-#define KD_CONST_3 0.5
-#define KP_CONST_3 2
+#define KI_CONST_3 5
+#define KD_CONST_3 0.2
+#define KP_CONST_3 100
 
 #define ENCODER_1_STEPS 20127				// Ticks counted per turn of the reduction output of joint 1
 #define ENCODER_2_STEPS 20127				// Ticks counted per turn of the reduction output of joint 2
-#define ENCODER_3_STEPS	1					// Ticks counted per turn of the reduction output of joint 3
+#define ENCODER_3_STEPS	4324				// Ticks counted per turn of the reduction output of joint 3
 
 // Struct for Pins definition
 struct Pin{

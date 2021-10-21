@@ -73,6 +73,7 @@ void Motor::goHomePosition(){
 			timer->Instance -> CCR2 = 0;
 			__HAL_TIM_SetCounter(&ENCODER_1_TIMER, 0);
 			break;
+	    // Motor 3
 		case TIM_CHANNEL_3:
 			Motor::turnLeft(900);
 			while(HAL_GPIO_ReadPin(HALL_SENSOR_3_GPIO_Port, HALL_SENSOR_3_Pin) == GPIO_PIN_SET){

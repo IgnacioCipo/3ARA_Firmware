@@ -5,7 +5,7 @@
 #include "Encoder.hpp"
 #include "Settings.h"
 
-float current_angle = 0, output_pid_2 = 0;
+//float current_angle = 0, output_pid_2 = 0;
 
 void PID2Node(RobotInfoHandler *robot_info_handler){
 
@@ -25,7 +25,7 @@ void PID2Node(RobotInfoHandler *robot_info_handler){
 	// PID 2 object creation
 	PID pid2(KP_CONST_2, KD_CONST_2, KI_CONST_2, MAX_PID_OUTPUT, MIN_PID_OUTPUT, PID_UPDATE_TIME_S);
 
-	//float current_angle = 0, output_pid_2 = 0;
+	float current_angle = 0, output_pid_2 = 0;
 
 	while(1){
 		if(robot_info_handler->angle_2 == 0){

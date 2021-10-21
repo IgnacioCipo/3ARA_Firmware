@@ -176,7 +176,7 @@ void startPID1(void const * argument)
   /* Infinite loop */
   for(;;)
   {
-    osDelay(1);
+    osDelay(1000);
   }
   /* USER CODE END startPID1 */
 }
@@ -210,7 +210,7 @@ void startPID2(void const * argument)
 void startPID3(void const * argument)
 {
   /* USER CODE BEGIN startPID3 */
-	//PID3Node(&robot_info_handler);
+	PID3Node(&robot_info_handler);
   /* Infinite loop */
   for(;;)
   {
