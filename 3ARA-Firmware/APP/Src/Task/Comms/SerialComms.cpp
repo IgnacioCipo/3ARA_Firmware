@@ -16,7 +16,7 @@
 union {
 	float float_value;
 	uint8_t bytes[4];
-}angle_1, angle_2, angle_3, ticks, test_angle;
+}angle_1, angle_2, angle_3;
 
 // Buffer to save data received
 uint8_t rx_buffer[RECEIVED_BYTES];
@@ -25,7 +25,7 @@ uint8_t tx_buffer[] = {0x00, 0x01, 0x02, 0x0A};
 // Flag that activates when arrives a new package from serial port
 bool data_received = false;
 // Flag that indicates to send the data to the serial port
-bool data_send = true;
+bool data_send = false;
 
 void startSerialComms(RobotInfoHandler *info_handler){
 	HAL_UART_Receive_IT(&huart2, (uint8_t*) rx_buffer, RECEIVED_BYTES);

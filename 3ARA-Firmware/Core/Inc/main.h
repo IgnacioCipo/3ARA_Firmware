@@ -62,12 +62,16 @@ void Error_Handler(void);
 #define MOTOR_2_R_GPIO_Port GPIOE
 #define MOTOR_2_L_Pin GPIO_PIN_4
 #define MOTOR_2_L_GPIO_Port GPIOE
-#define MOTOR_1_L_Pin GPIO_PIN_3
-#define MOTOR_1_L_GPIO_Port GPIOC
+#define LED_1_Pin GPIO_PIN_1
+#define LED_1_GPIO_Port GPIOC
+#define MOTOR_1_R_Pin GPIO_PIN_3
+#define MOTOR_1_R_GPIO_Port GPIOC
 #define MOTOR_2_Pin GPIO_PIN_0
 #define MOTOR_2_GPIO_Port GPIOA
-#define MOTOR_1_R_Pin GPIO_PIN_4
-#define MOTOR_1_R_GPIO_Port GPIOA
+#define MOTOR_1_Pin GPIO_PIN_1
+#define MOTOR_1_GPIO_Port GPIOA
+#define MOTOR_1_L_Pin GPIO_PIN_4
+#define MOTOR_1_L_GPIO_Port GPIOA
 #define USER_BUTTON_Pin GPIO_PIN_8
 #define USER_BUTTON_GPIO_Port GPIOE
 #define LED_2_Pin GPIO_PIN_15
@@ -78,14 +82,12 @@ void Error_Handler(void);
 #define MOTOR_3_R_GPIO_Port GPIOD
 #define MOTOR_3_L_Pin GPIO_PIN_11
 #define MOTOR_3_L_GPIO_Port GPIOD
+#define HALL_SENSOR_3_Pin GPIO_PIN_5
+#define HALL_SENSOR_3_GPIO_Port GPIOD
+#define HALL_SENSOR_2_Pin GPIO_PIN_6
+#define HALL_SENSOR_2_GPIO_Port GPIOD
 #define HALL_SENSOR_1_Pin GPIO_PIN_7
 #define HALL_SENSOR_1_GPIO_Port GPIOD
-#define HALL_SENSOR_2_Pin GPIO_PIN_4
-#define HALL_SENSOR_2_GPIO_Port GPIOB
-#define HALL_SENSOR_3_Pin GPIO_PIN_5
-#define HALL_SENSOR_3_GPIO_Port GPIOB
-#define LED_1_Pin GPIO_PIN_0
-#define LED_1_GPIO_Port GPIOE
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */

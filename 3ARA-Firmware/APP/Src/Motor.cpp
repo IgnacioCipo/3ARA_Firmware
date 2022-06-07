@@ -55,29 +55,27 @@ void Motor::goHomePosition(){
 	switch(channel){
 		// Motor 2
 		case TIM_CHANNEL_1:
-			Motor::turnRight(900);
+			Motor::turnRight(800);
 			while(HAL_GPIO_ReadPin(HALL_SENSOR_2_GPIO_Port, HALL_SENSOR_2_Pin) == GPIO_PIN_SET){
-				osDelay(10);
+				osDelay(2);
 			}
-
 			timer->Instance -> CCR1 = 0;
 			__HAL_TIM_SetCounter(&ENCODER_2_TIMER, 0);
 			break;
 		// Motor 1
 		case TIM_CHANNEL_2:
-			Motor::turnLeft(900);
+			Motor::turnLeft(850);
 			while(HAL_GPIO_ReadPin(HALL_SENSOR_1_GPIO_Port, HALL_SENSOR_1_Pin) == GPIO_PIN_SET){
-				osDelay(10);
+				osDelay(2);
 			}
-
 			timer->Instance -> CCR2 = 0;
 			__HAL_TIM_SetCounter(&ENCODER_1_TIMER, 0);
 			break;
 	    // Motor 3
 		case TIM_CHANNEL_3:
-			Motor::turnLeft(900);
+			Motor::turnRight(700);
 			while(HAL_GPIO_ReadPin(HALL_SENSOR_3_GPIO_Port, HALL_SENSOR_3_Pin) == GPIO_PIN_SET){
-				osDelay(10);
+				osDelay(2);
 			}
 			timer->Instance -> CCR3 = 0;
 			__HAL_TIM_SetCounter(&ENCODER_3_TIMER, 0);
