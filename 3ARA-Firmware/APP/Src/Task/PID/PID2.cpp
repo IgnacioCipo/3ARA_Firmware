@@ -4,8 +4,11 @@
 #include "Motor.hpp"
 #include "Encoder.hpp"
 #include "Settings.h"
+#include "stm32f4xx_it.h"
 
-//float current_angle = 0, output_pid_2 = 0;
+float output_pid_2 = 0;
+float current_angle_2 = 0;
+int hall_2_flag = 0;
 
 void PID2Node(RobotInfoHandler *robot_info_handler){
 
@@ -25,18 +28,30 @@ void PID2Node(RobotInfoHandler *robot_info_handler){
 	// PID 2 object creation
 	PID pid2(KP_CONST_2, KD_CONST_2, KI_CONST_2, MAX_PID_OUTPUT, MIN_PID_OUTPUT, PID_UPDATE_TIME_S);
 
-	float current_angle = 0, output_pid_2 = 0;
+	//float current_angle = 0;
+	if(robot_info_handler->angle_2 == 0){
+		motor2.goHomePosition();
+	}
 
 	while(1){
-		if(robot_info_handler->angle_2 == 0){
-			motor2.goHomePosition();
+		if(hall_2_flag == 1){
+			hall_2_flag = 0;
+			motor2.stopMotor();
+			current_angle_2 = 0;
 		}
-		else{
-			current_angle = encoder2.getAngle();
-			output_pid_2 = pid2.updatePID(robot_info_handler->angle_2, current_angle);
-			if(output_pid_2 > 0) motor2.turnLeft(output_pid_2);
-			else motor2.turnRight(-output_pid_2);
-		}
+		current_angle_2 = encoder2.getAngle();
+		//output_pid_2 = pid2.updatePID(robot_info_handler->angle_2, current_angle_2);
+		//if(output_pid_2 > 0) motor2.turnLeft(output_pid_2);
+		//else if (output_pid_2 < 0) motor2.turnRight(-output_pid_2);
 		osDelay(PID_UPDATE_TIME_mS);
 	}
 }
+
+// Callback function for external gpio interrupt
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
+	if(GPIO_Pin == GPIO_PIN_6){
+		hall_2_flag = 1;
+		HAL_GPIO_TogglePin(LED_1_GPIO_Port, LED_1_Pin);
+	}
+}
+

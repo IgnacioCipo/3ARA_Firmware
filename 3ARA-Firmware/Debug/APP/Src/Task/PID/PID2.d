@@ -54,7 +54,8 @@ APP/Src/Task/PID/PID2.o: ../APP/Src/Task/PID/PID2.cpp \
  G:/Repositorios/3ARA_Firmware/3ARA-Firmware/APP/Inc/Motor.hpp \
  G:/Repositorios/3ARA_Firmware/3ARA-Firmware/APP/Inc/Settings.h \
  G:/Repositorios/3ARA_Firmware/3ARA-Firmware/APP/Inc/Encoder.hpp \
- G:/Repositorios/3ARA_Firmware/3ARA-Firmware/APP/Inc/Settings.h
+ G:/Repositorios/3ARA_Firmware/3ARA-Firmware/APP/Inc/Settings.h \
+ ../Core/Inc/stm32f4xx_it.h
 
 G:/Repositorios/3ARA_Firmware/3ARA-Firmware/APP/Inc/3ARAEntrypoint.h:
 
@@ -171,3 +172,5 @@ G:/Repositorios/3ARA_Firmware/3ARA-Firmware/APP/Inc/Settings.h:
 G:/Repositorios/3ARA_Firmware/3ARA-Firmware/APP/Inc/Encoder.hpp:
 
 G:/Repositorios/3ARA_Firmware/3ARA-Firmware/APP/Inc/Settings.h:
+
+../Core/Inc/stm32f4xx_it.h:

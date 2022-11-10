@@ -56,11 +56,11 @@ void Motor::goHomePosition(){
 		// Motor 2
 		case TIM_CHANNEL_1:
 			Motor::turnRight(800);
-			while(HAL_GPIO_ReadPin(HALL_SENSOR_2_GPIO_Port, HALL_SENSOR_2_Pin) == GPIO_PIN_SET){
+			while(HAL_GPIO_ReadPin(GPIOD, GPIO_PIN_6) == GPIO_PIN_SET){
 				osDelay(2);
 			}
 			timer->Instance -> CCR1 = 0;
-			__HAL_TIM_SetCounter(&ENCODER_2_TIMER, 0);
+			__HAL_TIM_SetCounter(&ENCODER_2_TIMER, 32767);
 			break;
 		// Motor 1
 		case TIM_CHANNEL_2:
@@ -69,7 +69,7 @@ void Motor::goHomePosition(){
 				osDelay(2);
 			}
 			timer->Instance -> CCR2 = 0;
-			__HAL_TIM_SetCounter(&ENCODER_1_TIMER, 0);
+			__HAL_TIM_SetCounter(&ENCODER_1_TIMER, 32767);
 			break;
 	    // Motor 3
 		case TIM_CHANNEL_3:
@@ -78,11 +78,31 @@ void Motor::goHomePosition(){
 				osDelay(2);
 			}
 			timer->Instance -> CCR3 = 0;
-			__HAL_TIM_SetCounter(&ENCODER_3_TIMER, 0);
+			__HAL_TIM_SetCounter(&ENCODER_3_TIMER, 32767);
 			break;
 		case TIM_CHANNEL_4:
 			timer->Instance -> CCR4 = 0;
 			//__HAL_TIM_SetCounter(timer, 0);
 			break;
+	}
+}
+
+void Motor::stopMotor(){
+	//HAL_GPIO_WritePin(gpio_port_1, gpio_pin_1, GPIO_PIN_SET);
+	//HAL_GPIO_WritePin(gpio_port_2, gpio_pin_2, GPIO_PIN_SET);
+	switch(channel){
+			case TIM_CHANNEL_1:
+				timer->Instance -> CCR1 = 0;
+				__HAL_TIM_SetCounter(&ENCODER_2_TIMER, 32767);
+				break;
+			case TIM_CHANNEL_2:
+				timer->Instance -> CCR2 = 0;
+				break;
+			case TIM_CHANNEL_3:
+				timer->Instance -> CCR3 = 0;
+				break;
+			case TIM_CHANNEL_4:
+				timer->Instance -> CCR4 = 0;
+				break;
 	}
 }

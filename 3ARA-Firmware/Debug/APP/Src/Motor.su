@@ -2,3 +2,4 @@ Motor.cpp:6:1:Motor::Motor(MotorChannel&, Pin&, Pin&)	24	static
 Motor.cpp:16:6:void Motor::turnLeft(uint32_t)	16	static
 Motor.cpp:35:6:void Motor::turnRight(uint32_t)	16	static
 Motor.cpp:54:6:void Motor::goHomePosition()	16	static
+Motor.cpp:90:6:void Motor::stopMotor()	16	static

@@ -1,6 +1,7 @@
 #include "Encoder.hpp"
 
 float ticks_1;
+uint32_t angle_2_ticks;
 
 Encoder::Encoder(TIM_HandleTypeDef* encoder_timer, float count_per_turn){
 	timer = encoder_timer;
@@ -10,7 +11,8 @@ Encoder::Encoder(TIM_HandleTypeDef* encoder_timer, float count_per_turn){
 
 float Encoder::getAngle(){
 	ticks_1 = __HAL_TIM_GetCounter(timer);
-	angle = __HAL_TIM_GetCounter(timer) * encoder_resolution;
+	angle = (__HAL_TIM_GetCounter(timer) - 32767) * encoder_resolution;
+	angle_2_ticks = __HAL_TIM_GetCounter(timer);
 	return angle;
 }
 

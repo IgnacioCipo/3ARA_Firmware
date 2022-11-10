@@ -13,6 +13,7 @@ class Motor{
 		void turnLeft(uint32_t duty);
 		void turnRight(uint32_t duty);
 		void goHomePosition();
+		void stopMotor();
 
 	private:
 		uint16_t gpio_pin_1;

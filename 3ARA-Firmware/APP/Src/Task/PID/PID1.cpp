@@ -6,7 +6,7 @@
 #include "Settings.h"
 
 float output_pid_1=0;
-//float current_angle = 0;
+float current_angle_1 = 0;
 
 void PID1Node(RobotInfoHandler *robot_info_handler){
 
@@ -27,21 +27,17 @@ void PID1Node(RobotInfoHandler *robot_info_handler){
 	PID pid1(KP_CONST_1, KD_CONST_1, KI_CONST_1, MAX_PID_OUTPUT, MIN_PID_OUTPUT, PID_UPDATE_TIME_S);
 
 	//float output_pid_1=0;
-	float current_angle = 0;
-
-	//motor1.goHomePosition();
+	//float current_angle = 0;
+	if(robot_info_handler->angle_1 == 0){
+		motor1.goHomePosition();
+	}
 
 	while(1){
-		if(robot_info_handler->angle_1 == 0){
-			motor1.goHomePosition();
-			//current_angle = 0;
-		}
-		else{
-			current_angle = encoder1.getAngle();
-			output_pid_1 = pid1.updatePID(robot_info_handler->angle_1, current_angle);
-			if(output_pid_1 > 0) motor1.turnRight(output_pid_1);
-			else motor1.turnLeft(-output_pid_1);
-		}
+
+		current_angle_1 = encoder1.getAngle();
+		//output_pid_1 = pid1.updatePID(robot_info_handler->angle_1, current_angle_1);
+		//if(output_pid_1 > 0) motor1.turnRight(output_pid_1);
+		//else if (output_pid_1 < 0) motor1.turnLeft(-output_pid_1);
 		osDelay(PID_UPDATE_TIME_mS);
 	}
 }
