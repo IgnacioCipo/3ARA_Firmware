@@ -30,7 +30,12 @@ void PID2Node(RobotInfoHandler *robot_info_handler){
 
 	//float current_angle = 0;
 	if(robot_info_handler->angle_2 == 0){
-		motor2.goHomePosition();
+		// Check if the hall is in the initial position
+		if(HAL_GPIO_ReadPin(GPIOD, GPIO_PIN_6) == GPIO_PIN_RESET){
+			current_angle_2 = 0;
+			encoder2.resetTicksCounter();
+		}
+		else	motor2.goHomePosition();
 	}
 
 	while(1){
@@ -40,9 +45,9 @@ void PID2Node(RobotInfoHandler *robot_info_handler){
 			current_angle_2 = 0;
 		}
 		current_angle_2 = encoder2.getAngle();
-		//output_pid_2 = pid2.updatePID(robot_info_handler->angle_2, current_angle_2);
-		//if(output_pid_2 > 0) motor2.turnLeft(output_pid_2);
-		//else if (output_pid_2 < 0) motor2.turnRight(-output_pid_2);
+		output_pid_2 = pid2.updatePID(robot_info_handler->angle_2, current_angle_2);
+		if(output_pid_2 > 0) motor2.turnLeft(output_pid_2);
+		else if (output_pid_2 < 0) motor2.turnRight(-output_pid_2);
 		osDelay(PID_UPDATE_TIME_mS);
 	}
 }
