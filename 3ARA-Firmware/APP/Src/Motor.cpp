@@ -65,7 +65,7 @@ void Motor::goHomePosition(){
 		// Motor 1
 		case TIM_CHANNEL_2:
 			Motor::turnLeft(850);
-			while(HAL_GPIO_ReadPin(HALL_SENSOR_1_GPIO_Port, HALL_SENSOR_1_Pin) == GPIO_PIN_SET){
+			while(HAL_GPIO_ReadPin(GPIOD, GPIO_PIN_7) == GPIO_PIN_SET){
 				osDelay(2);
 			}
 			timer->Instance -> CCR2 = 0;
@@ -74,7 +74,7 @@ void Motor::goHomePosition(){
 	    // Motor 3
 		case TIM_CHANNEL_3:
 			Motor::turnRight(700);
-			while(HAL_GPIO_ReadPin(HALL_SENSOR_3_GPIO_Port, HALL_SENSOR_3_Pin) == GPIO_PIN_SET){
+			while(HAL_GPIO_ReadPin(GPIOD, GPIO_PIN_5) == GPIO_PIN_SET){
 				osDelay(2);
 			}
 			timer->Instance -> CCR3 = 0;
@@ -97,9 +97,11 @@ void Motor::stopMotor(){
 				break;
 			case TIM_CHANNEL_2:
 				timer->Instance -> CCR2 = 0;
+				__HAL_TIM_SetCounter(&ENCODER_1_TIMER, 32767);
 				break;
 			case TIM_CHANNEL_3:
 				timer->Instance -> CCR3 = 0;
+				__HAL_TIM_SetCounter(&ENCODER_3_TIMER, 32767);
 				break;
 			case TIM_CHANNEL_4:
 				timer->Instance -> CCR4 = 0;

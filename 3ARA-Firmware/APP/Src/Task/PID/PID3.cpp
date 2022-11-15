@@ -6,6 +6,8 @@
 #include "Settings.h"
 
 float current_angle_3 = 0, output_pid_3 = 0;
+int hall_3_flag = 0;
+float pulses_3;
 
 void PID3Node(RobotInfoHandler *robot_info_handler){
 	// Pins definition for motor 3
@@ -26,16 +28,34 @@ void PID3Node(RobotInfoHandler *robot_info_handler){
 
 	//float current_angle = 0, output_pid_3 = 0;
 	if(robot_info_handler->angle_3 == 0){
-		motor3.goHomePosition();
+		// Check if the hall is in the initial position
+		if(HAL_GPIO_ReadPin(GPIOD, GPIO_PIN_5) == GPIO_PIN_RESET){				// Change for PIN for hall 3
+			current_angle_3 = 0;
+			encoder3.resetTicksCounter();
+		}
+		else	motor3.goHomePosition();
 	}
-	while(1){
 
+	while(1){
+		if(hall_3_flag == 1){
+			hall_3_flag = 0;
+			motor3.stopMotor();
+			current_angle_3 = 0;
+		}
+		pulses_3 = encoder3.getPulses();
 		current_angle_3 = encoder3.getAngle();
 		output_pid_3 = pid3.updatePID(robot_info_handler->angle_3, current_angle_3);
 		if(output_pid_3 > 0) motor3.turnLeft(output_pid_3);
 		else if(output_pid_3 < 0) motor3.turnRight(-output_pid_3);
-
 		osDelay(PID_UPDATE_TIME_mS);
 	}
 }
 
+/*
+// Callback function for external gpio interrupt
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
+	if(GPIO_Pin == GPIO_PIN_5){						// Change for PIN for hall 3
+		hall_3_flag = 1;
+	}
+}
+*/

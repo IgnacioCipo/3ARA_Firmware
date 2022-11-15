@@ -48,6 +48,9 @@
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN Variables */
 RobotInfoHandler robot_info_handler;
+extern int hall_1_flag;
+extern int hall_2_flag;
+extern int hall_3_flag;
 
 /* USER CODE END Variables */
 osThreadId defaultTaskHandle;
@@ -241,7 +244,19 @@ void startROSComms(void const * argument)
 
 /* Private application code --------------------------------------------------*/
 /* USER CODE BEGIN Application */
-
+// Callback function for external gpio interrupt
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
+	if(GPIO_Pin == GPIO_PIN_6){
+		hall_2_flag = 1;
+		HAL_GPIO_TogglePin(LED_1_GPIO_Port, LED_1_Pin);
+	}
+	else if(GPIO_Pin == GPIO_PIN_5){						// Change for PIN for hall 3
+		hall_3_flag = 1;
+	}
+	else if(GPIO_Pin == GPIO_PIN_7){						// Change PIN for hall 1
+		hall_1_flag = 1;
+	}
+}
 /* USER CODE END Application */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

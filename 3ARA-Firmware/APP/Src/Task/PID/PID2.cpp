@@ -9,6 +9,7 @@
 float output_pid_2 = 0;
 float current_angle_2 = 0;
 int hall_2_flag = 0;
+float pulses_2;
 
 void PID2Node(RobotInfoHandler *robot_info_handler){
 
@@ -44,6 +45,7 @@ void PID2Node(RobotInfoHandler *robot_info_handler){
 			motor2.stopMotor();
 			current_angle_2 = 0;
 		}
+		pulses_2 = encoder2.getPulses();
 		current_angle_2 = encoder2.getAngle();
 		output_pid_2 = pid2.updatePID(robot_info_handler->angle_2, current_angle_2);
 		if(output_pid_2 > 0) motor2.turnLeft(output_pid_2);
@@ -52,6 +54,7 @@ void PID2Node(RobotInfoHandler *robot_info_handler){
 	}
 }
 
+/*
 // Callback function for external gpio interrupt
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
 	if(GPIO_Pin == GPIO_PIN_6){
@@ -59,4 +62,5 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
 		HAL_GPIO_TogglePin(LED_1_GPIO_Port, LED_1_Pin);
 	}
 }
+*/
 

@@ -82,10 +82,6 @@ void Error_Handler(void);
 #define MOTOR_3_R_GPIO_Port GPIOD
 #define MOTOR_3_L_Pin GPIO_PIN_11
 #define MOTOR_3_L_GPIO_Port GPIOD
-#define HALL_SENSOR_3_Pin GPIO_PIN_5
-#define HALL_SENSOR_3_GPIO_Port GPIOD
-#define HALL_SENSOR_1_Pin GPIO_PIN_7
-#define HALL_SENSOR_1_GPIO_Port GPIOD
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */
