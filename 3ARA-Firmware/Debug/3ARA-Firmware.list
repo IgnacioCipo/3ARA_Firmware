@@ -2606,7 +2606,7 @@ void PID3Node(RobotInfoHandler *robot_info_handler){
  8001936:	eddf 2a51 	vldr	s5, [pc, #324]	; 8001a7c <PID3Node+0x1a0>
  800193a:	ed9f 2a51 	vldr	s4, [pc, #324]	; 8001a80 <PID3Node+0x1a4>
  800193e:	eddf 1a51 	vldr	s3, [pc, #324]	; 8001a84 <PID3Node+0x1a8>
- 8001942:	eeb1 1a04 	vmov.f32	s2, #20	; 0x40a00000  5.0
+ 8001942:	eeb2 1a00 	vmov.f32	s2, #32	; 0x41000000  8.0
  8001946:	eddf 0a50 	vldr	s1, [pc, #320]	; 8001a88 <PID3Node+0x1ac>
  800194a:	ed9f 0a50 	vldr	s0, [pc, #320]	; 8001a8c <PID3Node+0x1b0>
  800194e:	4618      	mov	r0, r3
@@ -2738,7 +2738,7 @@ void PID3Node(RobotInfoHandler *robot_info_handler){
  8001a80:	c47a0000 	.word	0xc47a0000
  8001a84:	447a0000 	.word	0x447a0000
  8001a88:	3dcccccd 	.word	0x3dcccccd
- 8001a8c:	42200000 	.word	0x42200000
+ 8001a8c:	428c0000 	.word	0x428c0000
  8001a90:	40020c00 	.word	0x40020c00
  8001a94:	20000068 	.word	0x20000068
  8001a98:	20000070 	.word	0x20000070
