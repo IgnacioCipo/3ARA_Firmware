@@ -248,7 +248,6 @@ void startROSComms(void const * argument)
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
 	if(GPIO_Pin == GPIO_PIN_6){
 		hall_2_flag = 1;
-		HAL_GPIO_TogglePin(LED_1_GPIO_Port, LED_1_Pin);
 	}
 	else if(GPIO_Pin == GPIO_PIN_5){						// Change for PIN for hall 3
 		hall_3_flag = 1;

@@ -32,11 +32,11 @@
 // PID 2 ctes
 #define KI_CONST_2 8
 #define KD_CONST_2 1
-#define KP_CONST_2 100
+#define KP_CONST_2 80
 // PID 3 ctes
 #define KI_CONST_3 5
-#define KD_CONST_3 0.2
-#define KP_CONST_3 70
+#define KD_CONST_3 0.1
+#define KP_CONST_3 40
 
 #define ENCODER_1_STEPS 20127				// Ticks counted per turn of the reduction output of joint 1
 #define ENCODER_2_STEPS 20127				// Ticks counted per turn of the reduction output of joint 2

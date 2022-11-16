@@ -33,7 +33,9 @@ void PID3Node(RobotInfoHandler *robot_info_handler){
 			current_angle_3 = 0;
 			encoder3.resetTicksCounter();
 		}
-		else	motor3.goHomePosition();
+		else{
+			motor3.goHomePosition();
+		}
 	}
 
 	while(1){
