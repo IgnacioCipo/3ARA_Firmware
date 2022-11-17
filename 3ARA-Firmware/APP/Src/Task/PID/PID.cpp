@@ -16,9 +16,10 @@ PID::PID(float kp, float kd, float ki, float max_output, float min_output, float
 
 float PID::updatePID(float setpoint_position, float current_position){
 	error_ = setpoint_position - current_position;
+	if(error_ < 3.0f && error_ > -3.0f) error_ = 0;
 	output = arm_pid_f32(&pid_, error_);
 	if(output > max_pid_output_) output = max_pid_output_;
 	else if(output < min_pid_output_) output = min_pid_output_;
-	if(error_ < 2.0f && error_ > -2.0f) output = 0;
+	//if(error_ < 2.0f && error_ > -2.0f) output = 0;
 	return output;
 }

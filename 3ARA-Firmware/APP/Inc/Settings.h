@@ -30,9 +30,9 @@
 #define KD_CONST_1 1
 #define KP_CONST_1 800
 // PID 2 ctes
-#define KI_CONST_2 8
-#define KD_CONST_2 1
-#define KP_CONST_2 80
+#define KI_CONST_2 4
+#define KD_CONST_2 0.1
+#define KP_CONST_2 200
 // PID 3 ctes
 #define KI_CONST_3 8
 #define KD_CONST_3 0.1
