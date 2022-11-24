@@ -53,11 +53,4 @@ void PID3Node(RobotInfoHandler *robot_info_handler){
 	}
 }
 
-/*
-// Callback function for external gpio interrupt
-void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
-	if(GPIO_Pin == GPIO_PIN_5){						// Change for PIN for hall 3
-		hall_3_flag = 1;
-	}
-}
-*/
+

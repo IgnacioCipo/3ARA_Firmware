@@ -27,23 +27,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
  11 .ARM.attributes 00000030  00000000  00000000  00020010  2**0
                   CONTENTS, READONLY
- 12 .debug_info   00029a65  00000000  00000000  00020040  2**0
+ 12 .debug_info   00029a77  00000000  00000000  00020040  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 13 .debug_abbrev 0000515d  00000000  00000000  00049aa5  2**0
+ 13 .debug_abbrev 0000515d  00000000  00000000  00049ab7  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_aranges 00001710  00000000  00000000  0004ec08  2**3
+ 14 .debug_aranges 00001710  00000000  00000000  0004ec18  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_ranges 00001540  00000000  00000000  00050318  2**3
+ 15 .debug_ranges 00001540  00000000  00000000  00050328  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_macro  00027d59  00000000  00000000  00051858  2**0
+ 16 .debug_macro  00027d59  00000000  00000000  00051868  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   0001ef70  00000000  00000000  000795b1  2**0
+ 17 .debug_line   0001ef6c  00000000  00000000  000795c1  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    000d9788  00000000  00000000  00098521  2**0
+ 18 .debug_str    000d9792  00000000  00000000  0009852d  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000053  00000000  00000000  00171ca9  2**0
+ 19 .comment      00000053  00000000  00000000  00171cbf  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  00005ef0  00000000  00000000  00171cfc  2**2
+ 20 .debug_frame  00005ef0  00000000  00000000  00171d14  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -1243,7 +1243,6 @@ float Encoder::getAngle(){
  8000e84:	4602      	mov	r2, r0
  8000e86:	687b      	ldr	r3, [r7, #4]
  8000e88:	605a      	str	r2, [r3, #4]
-	//angle_2_ticks = __HAL_TIM_GetCounter(timer);
 	return angle;
  8000e8a:	687b      	ldr	r3, [r7, #4]
  8000e8c:	685b      	ldr	r3, [r3, #4]
@@ -2186,10 +2185,10 @@ float PID::updatePID(float setpoint_position, float current_position){
 	...
 
 08001570 <PID1Node>:
-
 float output_pid_1=0;
 float current_angle_1 = 0;
 int hall_1_flag = 0;
+float pulses_1 = 0;
 
 void PID1Node(RobotInfoHandler *robot_info_handler){
  8001570:	b580      	push	{r7, lr}
@@ -2199,19 +2198,19 @@ void PID1Node(RobotInfoHandler *robot_info_handler){
 
 	// Pins definition for motor 1
 	Pin motor_1_a{MOTOR_1_L_GPIO_Port, MOTOR_1_L_Pin};
- 8001578:	4a5b      	ldr	r2, [pc, #364]	; (80016e8 <PID1Node+0x178>)
+ 8001578:	4a60      	ldr	r2, [pc, #384]	; (80016fc <PID1Node+0x18c>)
  800157a:	f107 0388 	add.w	r3, r7, #136	; 0x88
  800157e:	e892 0003 	ldmia.w	r2, {r0, r1}
  8001582:	e883 0003 	stmia.w	r3, {r0, r1}
 	Pin motor_1_b{MOTOR_1_R_GPIO_Port, MOTOR_1_R_Pin};
- 8001586:	4a59      	ldr	r2, [pc, #356]	; (80016ec <PID1Node+0x17c>)
+ 8001586:	4a5e      	ldr	r2, [pc, #376]	; (8001700 <PID1Node+0x190>)
  8001588:	f107 0380 	add.w	r3, r7, #128	; 0x80
  800158c:	e892 0003 	ldmia.w	r2, {r0, r1}
  8001590:	e883 0003 	stmia.w	r3, {r0, r1}
 
 	// Timer definition for motor 1
 	MotorChannel motor_1_timer{&MOTOR_1_TIMER, MOTOR_1_CHANNEL};
- 8001594:	4a56      	ldr	r2, [pc, #344]	; (80016f0 <PID1Node+0x180>)
+ 8001594:	4a5b      	ldr	r2, [pc, #364]	; (8001704 <PID1Node+0x194>)
  8001596:	f107 0378 	add.w	r3, r7, #120	; 0x78
  800159a:	e892 0003 	ldmia.w	r2, {r0, r1}
  800159e:	e883 0003 	stmia.w	r3, {r0, r1}
@@ -2227,20 +2226,20 @@ void PID1Node(RobotInfoHandler *robot_info_handler){
 	// Encoder 1 object creation
 	Encoder encoder1(&ENCODER_1_TIMER, ENCODER_1_STEPS);
  80015b6:	f107 0354 	add.w	r3, r7, #84	; 0x54
- 80015ba:	ed9f 0a4e 	vldr	s0, [pc, #312]	; 80016f4 <PID1Node+0x184>
- 80015be:	494e      	ldr	r1, [pc, #312]	; (80016f8 <PID1Node+0x188>)
+ 80015ba:	ed9f 0a53 	vldr	s0, [pc, #332]	; 8001708 <PID1Node+0x198>
+ 80015be:	4953      	ldr	r1, [pc, #332]	; (800170c <PID1Node+0x19c>)
  80015c0:	4618      	mov	r0, r3
  80015c2:	f7ff fc0f 	bl	8000de4 <_ZN7EncoderC1EP17TIM_HandleTypeDeff>
 
 	// PID 1 object creation
 	PID pid1(KP_CONST_1, KD_CONST_1, KI_CONST_1, MAX_PID_OUTPUT, MIN_PID_OUTPUT, PID_UPDATE_TIME_S);
  80015c6:	f107 030c 	add.w	r3, r7, #12
- 80015ca:	eddf 2a4c 	vldr	s5, [pc, #304]	; 80016fc <PID1Node+0x18c>
- 80015ce:	ed9f 2a4c 	vldr	s4, [pc, #304]	; 8001700 <PID1Node+0x190>
- 80015d2:	eddf 1a4c 	vldr	s3, [pc, #304]	; 8001704 <PID1Node+0x194>
- 80015d6:	eeb2 1a00 	vmov.f32	s2, #32	; 0x41000000  8.0
- 80015da:	eef7 0a00 	vmov.f32	s1, #112	; 0x3f800000  1.0
- 80015de:	ed9f 0a4a 	vldr	s0, [pc, #296]	; 8001708 <PID1Node+0x198>
+ 80015ca:	eddf 2a51 	vldr	s5, [pc, #324]	; 8001710 <PID1Node+0x1a0>
+ 80015ce:	ed9f 2a51 	vldr	s4, [pc, #324]	; 8001714 <PID1Node+0x1a4>
+ 80015d2:	eddf 1a51 	vldr	s3, [pc, #324]	; 8001718 <PID1Node+0x1a8>
+ 80015d6:	eeb0 1a00 	vmov.f32	s2, #0	; 0x40000000  2.0
+ 80015da:	eddf 0a50 	vldr	s1, [pc, #320]	; 800171c <PID1Node+0x1ac>
+ 80015de:	eeb3 0a04 	vmov.f32	s0, #52	; 0x41a00000  20.0
  80015e2:	4618      	mov	r0, r3
  80015e4:	f7ff fefc 	bl	80013e0 <_ZN3PIDC1Effffff>
 
@@ -2253,7 +2252,7 @@ void PID1Node(RobotInfoHandler *robot_info_handler){
 		// Check if the hall is in the initial position
 		if(HAL_GPIO_ReadPin(GPIOD, GPIO_PIN_7) == GPIO_PIN_RESET){		// Cambiar por el pin del hall 1
  80015f8:	2180      	movs	r1, #128	; 0x80
- 80015fa:	4844      	ldr	r0, [pc, #272]	; (800170c <PID1Node+0x19c>)
+ 80015fa:	4849      	ldr	r0, [pc, #292]	; (8001720 <PID1Node+0x1b0>)
  80015fc:	f001 fd96 	bl	800312c <HAL_GPIO_ReadPin>
  8001600:	4603      	mov	r3, r0
  8001602:	2b00      	cmp	r3, #0
@@ -2264,7 +2263,7 @@ void PID1Node(RobotInfoHandler *robot_info_handler){
  800160c:	2b00      	cmp	r3, #0
  800160e:	d009      	beq.n	8001624 <PID1Node+0xb4>
 			current_angle_1 = 0;
- 8001610:	4b3f      	ldr	r3, [pc, #252]	; (8001710 <PID1Node+0x1a0>)
+ 8001610:	4b44      	ldr	r3, [pc, #272]	; (8001724 <PID1Node+0x1b4>)
  8001612:	f04f 0200 	mov.w	r2, #0
  8001616:	601a      	str	r2, [r3, #0]
 			encoder1.resetTicksCounter();
@@ -2281,12 +2280,12 @@ void PID1Node(RobotInfoHandler *robot_info_handler){
 
 	while(1){
 		if(hall_1_flag == 1){
- 800162e:	4b39      	ldr	r3, [pc, #228]	; (8001714 <PID1Node+0x1a4>)
+ 800162e:	4b3e      	ldr	r3, [pc, #248]	; (8001728 <PID1Node+0x1b8>)
  8001630:	681b      	ldr	r3, [r3, #0]
  8001632:	2b01      	cmp	r3, #1
  8001634:	d10b      	bne.n	800164e <PID1Node+0xde>
 			hall_1_flag = 0;
- 8001636:	4b37      	ldr	r3, [pc, #220]	; (8001714 <PID1Node+0x1a4>)
+ 8001636:	4b3c      	ldr	r3, [pc, #240]	; (8001728 <PID1Node+0x1b8>)
  8001638:	2200      	movs	r2, #0
  800163a:	601a      	str	r2, [r3, #0]
 			motor1.stopMotor();
@@ -2294,267 +2293,270 @@ void PID1Node(RobotInfoHandler *robot_info_handler){
  8001640:	4618      	mov	r0, r3
  8001642:	f7ff fdc5 	bl	80011d0 <_ZN5Motor9stopMotorEv>
 			current_angle_1 = 0;
- 8001646:	4b32      	ldr	r3, [pc, #200]	; (8001710 <PID1Node+0x1a0>)
+ 8001646:	4b37      	ldr	r3, [pc, #220]	; (8001724 <PID1Node+0x1b4>)
  8001648:	f04f 0200 	mov.w	r2, #0
  800164c:	601a      	str	r2, [r3, #0]
 		}
-		current_angle_1 = encoder1.getAngle();
+		pulses_1 = encoder1.getPulses();
  800164e:	f107 0354 	add.w	r3, r7, #84	; 0x54
  8001652:	4618      	mov	r0, r3
- 8001654:	f7ff fbe8 	bl	8000e28 <_ZN7Encoder8getAngleEv>
+ 8001654:	f7ff fc2a 	bl	8000eac <_ZN7Encoder9getPulsesEv>
  8001658:	eef0 7a40 	vmov.f32	s15, s0
- 800165c:	4b2c      	ldr	r3, [pc, #176]	; (8001710 <PID1Node+0x1a0>)
+ 800165c:	4b33      	ldr	r3, [pc, #204]	; (800172c <PID1Node+0x1bc>)
  800165e:	edc3 7a00 	vstr	s15, [r3]
+		current_angle_1 = encoder1.getAngle();
+ 8001662:	f107 0354 	add.w	r3, r7, #84	; 0x54
+ 8001666:	4618      	mov	r0, r3
+ 8001668:	f7ff fbde 	bl	8000e28 <_ZN7Encoder8getAngleEv>
+ 800166c:	eef0 7a40 	vmov.f32	s15, s0
+ 8001670:	4b2c      	ldr	r3, [pc, #176]	; (8001724 <PID1Node+0x1b4>)
+ 8001672:	edc3 7a00 	vstr	s15, [r3]
 		output_pid_1 = pid1.updatePID(robot_info_handler->angle_1, current_angle_1);
- 8001662:	687b      	ldr	r3, [r7, #4]
- 8001664:	edd3 7a00 	vldr	s15, [r3]
- 8001668:	4b29      	ldr	r3, [pc, #164]	; (8001710 <PID1Node+0x1a0>)
- 800166a:	ed93 7a00 	vldr	s14, [r3]
- 800166e:	f107 030c 	add.w	r3, r7, #12
- 8001672:	eef0 0a47 	vmov.f32	s1, s14
- 8001676:	eeb0 0a67 	vmov.f32	s0, s15
- 800167a:	4618      	mov	r0, r3
- 800167c:	f7ff feee 	bl	800145c <_ZN3PID9updatePIDEff>
- 8001680:	eef0 7a40 	vmov.f32	s15, s0
- 8001684:	4b24      	ldr	r3, [pc, #144]	; (8001718 <PID1Node+0x1a8>)
- 8001686:	edc3 7a00 	vstr	s15, [r3]
-		if(output_pid_1 > 0) motor1.turnRight(output_pid_1);
- 800168a:	4b23      	ldr	r3, [pc, #140]	; (8001718 <PID1Node+0x1a8>)
- 800168c:	edd3 7a00 	vldr	s15, [r3]
- 8001690:	eef5 7ac0 	vcmpe.f32	s15, #0.0
- 8001694:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
- 8001698:	dd0c      	ble.n	80016b4 <PID1Node+0x144>
- 800169a:	4b1f      	ldr	r3, [pc, #124]	; (8001718 <PID1Node+0x1a8>)
- 800169c:	edd3 7a00 	vldr	s15, [r3]
- 80016a0:	eefc 7ae7 	vcvt.u32.f32	s15, s15
- 80016a4:	f107 0364 	add.w	r3, r7, #100	; 0x64
- 80016a8:	ee17 1a90 	vmov	r1, s15
- 80016ac:	4618      	mov	r0, r3
- 80016ae:	f7ff fca5 	bl	8000ffc <_ZN5Motor9turnRightEm>
- 80016b2:	e015      	b.n	80016e0 <PID1Node+0x170>
+ 8001676:	687b      	ldr	r3, [r7, #4]
+ 8001678:	edd3 7a00 	vldr	s15, [r3]
+ 800167c:	4b29      	ldr	r3, [pc, #164]	; (8001724 <PID1Node+0x1b4>)
+ 800167e:	ed93 7a00 	vldr	s14, [r3]
+ 8001682:	f107 030c 	add.w	r3, r7, #12
+ 8001686:	eef0 0a47 	vmov.f32	s1, s14
+ 800168a:	eeb0 0a67 	vmov.f32	s0, s15
+ 800168e:	4618      	mov	r0, r3
+ 8001690:	f7ff fee4 	bl	800145c <_ZN3PID9updatePIDEff>
+ 8001694:	eef0 7a40 	vmov.f32	s15, s0
+ 8001698:	4b25      	ldr	r3, [pc, #148]	; (8001730 <PID1Node+0x1c0>)
+ 800169a:	edc3 7a00 	vstr	s15, [r3]
+		if(output_pid_1 > 0){
+ 800169e:	4b24      	ldr	r3, [pc, #144]	; (8001730 <PID1Node+0x1c0>)
+ 80016a0:	edd3 7a00 	vldr	s15, [r3]
+ 80016a4:	eef5 7ac0 	vcmpe.f32	s15, #0.0
+ 80016a8:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+ 80016ac:	dd0c      	ble.n	80016c8 <PID1Node+0x158>
+			motor1.turnRight(output_pid_1);
+ 80016ae:	4b20      	ldr	r3, [pc, #128]	; (8001730 <PID1Node+0x1c0>)
+ 80016b0:	edd3 7a00 	vldr	s15, [r3]
+ 80016b4:	eefc 7ae7 	vcvt.u32.f32	s15, s15
+ 80016b8:	f107 0364 	add.w	r3, r7, #100	; 0x64
+ 80016bc:	ee17 1a90 	vmov	r1, s15
+ 80016c0:	4618      	mov	r0, r3
+ 80016c2:	f7ff fc9b 	bl	8000ffc <_ZN5Motor9turnRightEm>
+ 80016c6:	e015      	b.n	80016f4 <PID1Node+0x184>
+		}
 		else if (output_pid_1 < 0) motor1.turnLeft(-output_pid_1);
- 80016b4:	4b18      	ldr	r3, [pc, #96]	; (8001718 <PID1Node+0x1a8>)
- 80016b6:	edd3 7a00 	vldr	s15, [r3]
- 80016ba:	eef5 7ac0 	vcmpe.f32	s15, #0.0
- 80016be:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
- 80016c2:	d50d      	bpl.n	80016e0 <PID1Node+0x170>
- 80016c4:	4b14      	ldr	r3, [pc, #80]	; (8001718 <PID1Node+0x1a8>)
- 80016c6:	edd3 7a00 	vldr	s15, [r3]
- 80016ca:	eef1 7a67 	vneg.f32	s15, s15
- 80016ce:	eefc 7ae7 	vcvt.u32.f32	s15, s15
- 80016d2:	f107 0364 	add.w	r3, r7, #100	; 0x64
- 80016d6:	ee17 1a90 	vmov	r1, s15
- 80016da:	4618      	mov	r0, r3
- 80016dc:	f7ff fc3c 	bl	8000f58 <_ZN5Motor8turnLeftEm>
+ 80016c8:	4b19      	ldr	r3, [pc, #100]	; (8001730 <PID1Node+0x1c0>)
+ 80016ca:	edd3 7a00 	vldr	s15, [r3]
+ 80016ce:	eef5 7ac0 	vcmpe.f32	s15, #0.0
+ 80016d2:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+ 80016d6:	d50d      	bpl.n	80016f4 <PID1Node+0x184>
+ 80016d8:	4b15      	ldr	r3, [pc, #84]	; (8001730 <PID1Node+0x1c0>)
+ 80016da:	edd3 7a00 	vldr	s15, [r3]
+ 80016de:	eef1 7a67 	vneg.f32	s15, s15
+ 80016e2:	eefc 7ae7 	vcvt.u32.f32	s15, s15
+ 80016e6:	f107 0364 	add.w	r3, r7, #100	; 0x64
+ 80016ea:	ee17 1a90 	vmov	r1, s15
+ 80016ee:	4618      	mov	r0, r3
+ 80016f0:	f7ff fc32 	bl	8000f58 <_ZN5Motor8turnLeftEm>
 		osDelay(PID_UPDATE_TIME_mS);
- 80016e0:	203c      	movs	r0, #60	; 0x3c
- 80016e2:	f004 fa60 	bl	8005ba6 <osDelay>
+ 80016f4:	203c      	movs	r0, #60	; 0x3c
+ 80016f6:	f004 fa56 	bl	8005ba6 <osDelay>
 		if(hall_1_flag == 1){
- 80016e6:	e7a2      	b.n	800162e <PID1Node+0xbe>
- 80016e8:	080082c8 	.word	0x080082c8
- 80016ec:	080082d0 	.word	0x080082d0
- 80016f0:	080082d8 	.word	0x080082d8
- 80016f4:	469d3e00 	.word	0x469d3e00
- 80016f8:	20004130 	.word	0x20004130
- 80016fc:	3d75c28f 	.word	0x3d75c28f
- 8001700:	c47a0000 	.word	0xc47a0000
- 8001704:	447a0000 	.word	0x447a0000
- 8001708:	44480000 	.word	0x44480000
- 800170c:	40020c00 	.word	0x40020c00
- 8001710:	20000050 	.word	0x20000050
- 8001714:	20000054 	.word	0x20000054
- 8001718:	2000004c 	.word	0x2000004c
+ 80016fa:	e798      	b.n	800162e <PID1Node+0xbe>
+ 80016fc:	080082c8 	.word	0x080082c8
+ 8001700:	080082d0 	.word	0x080082d0
+ 8001704:	080082d8 	.word	0x080082d8
+ 8001708:	469d3e00 	.word	0x469d3e00
+ 800170c:	20004130 	.word	0x20004130
+ 8001710:	3d75c28f 	.word	0x3d75c28f
+ 8001714:	c47a0000 	.word	0xc47a0000
+ 8001718:	447a0000 	.word	0x447a0000
+ 800171c:	3dcccccd 	.word	0x3dcccccd
+ 8001720:	40020c00 	.word	0x40020c00
+ 8001724:	20000050 	.word	0x20000050
+ 8001728:	20000054 	.word	0x20000054
+ 800172c:	20000058 	.word	0x20000058
+ 8001730:	2000004c 	.word	0x2000004c
 
-0800171c <PID2Node>:
+08001734 <PID2Node>:
 float output_pid_2 = 0;
 float current_angle_2 = 0;
 int hall_2_flag = 0;
 float pulses_2;
 
 void PID2Node(RobotInfoHandler *robot_info_handler){
- 800171c:	b580      	push	{r7, lr}
- 800171e:	b0a4      	sub	sp, #144	; 0x90
- 8001720:	af00      	add	r7, sp, #0
- 8001722:	6078      	str	r0, [r7, #4]
+ 8001734:	b580      	push	{r7, lr}
+ 8001736:	b0a4      	sub	sp, #144	; 0x90
+ 8001738:	af00      	add	r7, sp, #0
+ 800173a:	6078      	str	r0, [r7, #4]
 
 	// Pins definition for motor 2
 	Pin motor_2_a{MOTOR_2_L_GPIO_Port, MOTOR_2_L_Pin};
- 8001724:	4a5f      	ldr	r2, [pc, #380]	; (80018a4 <PID2Node+0x188>)
- 8001726:	f107 0388 	add.w	r3, r7, #136	; 0x88
- 800172a:	e892 0003 	ldmia.w	r2, {r0, r1}
- 800172e:	e883 0003 	stmia.w	r3, {r0, r1}
+ 800173c:	4a5a      	ldr	r2, [pc, #360]	; (80018a8 <PID2Node+0x174>)
+ 800173e:	f107 0388 	add.w	r3, r7, #136	; 0x88
+ 8001742:	e892 0003 	ldmia.w	r2, {r0, r1}
+ 8001746:	e883 0003 	stmia.w	r3, {r0, r1}
 	Pin motor_2_b{MOTOR_2_R_GPIO_Port, MOTOR_2_R_Pin};
- 8001732:	4a5d      	ldr	r2, [pc, #372]	; (80018a8 <PID2Node+0x18c>)
- 8001734:	f107 0380 	add.w	r3, r7, #128	; 0x80
- 8001738:	e892 0003 	ldmia.w	r2, {r0, r1}
- 800173c:	e883 0003 	stmia.w	r3, {r0, r1}
+ 800174a:	4a58      	ldr	r2, [pc, #352]	; (80018ac <PID2Node+0x178>)
+ 800174c:	f107 0380 	add.w	r3, r7, #128	; 0x80
+ 8001750:	e892 0003 	ldmia.w	r2, {r0, r1}
+ 8001754:	e883 0003 	stmia.w	r3, {r0, r1}
 
 	// Timer definition for motor 2
 	MotorChannel motor_2_timer{&MOTOR_2_TIMER, MOTOR_2_CHANNEL};
- 8001740:	4b5a      	ldr	r3, [pc, #360]	; (80018ac <PID2Node+0x190>)
- 8001742:	67bb      	str	r3, [r7, #120]	; 0x78
- 8001744:	2300      	movs	r3, #0
- 8001746:	67fb      	str	r3, [r7, #124]	; 0x7c
+ 8001758:	4b55      	ldr	r3, [pc, #340]	; (80018b0 <PID2Node+0x17c>)
+ 800175a:	67bb      	str	r3, [r7, #120]	; 0x78
+ 800175c:	2300      	movs	r3, #0
+ 800175e:	67fb      	str	r3, [r7, #124]	; 0x7c
 
 	// Motor 2 object creation
 	Motor motor2(motor_2_timer, motor_2_a, motor_2_b);
- 8001748:	f107 0380 	add.w	r3, r7, #128	; 0x80
- 800174c:	f107 0288 	add.w	r2, r7, #136	; 0x88
- 8001750:	f107 0178 	add.w	r1, r7, #120	; 0x78
- 8001754:	f107 0064 	add.w	r0, r7, #100	; 0x64
- 8001758:	f7ff fbd2 	bl	8000f00 <_ZN5MotorC1ER12MotorChannelR3PinS3_>
+ 8001760:	f107 0380 	add.w	r3, r7, #128	; 0x80
+ 8001764:	f107 0288 	add.w	r2, r7, #136	; 0x88
+ 8001768:	f107 0178 	add.w	r1, r7, #120	; 0x78
+ 800176c:	f107 0064 	add.w	r0, r7, #100	; 0x64
+ 8001770:	f7ff fbc6 	bl	8000f00 <_ZN5MotorC1ER12MotorChannelR3PinS3_>
 
 	// Encoder 2 object creation
 	Encoder encoder2(&ENCODER_2_TIMER, ENCODER_2_STEPS);
- 800175c:	f107 0354 	add.w	r3, r7, #84	; 0x54
- 8001760:	ed9f 0a53 	vldr	s0, [pc, #332]	; 80018b0 <PID2Node+0x194>
- 8001764:	4953      	ldr	r1, [pc, #332]	; (80018b4 <PID2Node+0x198>)
- 8001766:	4618      	mov	r0, r3
- 8001768:	f7ff fb3c 	bl	8000de4 <_ZN7EncoderC1EP17TIM_HandleTypeDeff>
+ 8001774:	f107 0354 	add.w	r3, r7, #84	; 0x54
+ 8001778:	ed9f 0a4e 	vldr	s0, [pc, #312]	; 80018b4 <PID2Node+0x180>
+ 800177c:	494e      	ldr	r1, [pc, #312]	; (80018b8 <PID2Node+0x184>)
+ 800177e:	4618      	mov	r0, r3
+ 8001780:	f7ff fb30 	bl	8000de4 <_ZN7EncoderC1EP17TIM_HandleTypeDeff>
 
 	// PID 2 object creation
 	PID pid2(KP_CONST_2, KD_CONST_2, KI_CONST_2, MAX_PID_OUTPUT, MIN_PID_OUTPUT, PID_UPDATE_TIME_S);
- 800176c:	f107 030c 	add.w	r3, r7, #12
- 8001770:	eddf 2a51 	vldr	s5, [pc, #324]	; 80018b8 <PID2Node+0x19c>
- 8001774:	ed9f 2a51 	vldr	s4, [pc, #324]	; 80018bc <PID2Node+0x1a0>
- 8001778:	eddf 1a51 	vldr	s3, [pc, #324]	; 80018c0 <PID2Node+0x1a4>
- 800177c:	eeb1 1a00 	vmov.f32	s2, #16	; 0x40800000  4.0
- 8001780:	eddf 0a50 	vldr	s1, [pc, #320]	; 80018c4 <PID2Node+0x1a8>
- 8001784:	ed9f 0a50 	vldr	s0, [pc, #320]	; 80018c8 <PID2Node+0x1ac>
- 8001788:	4618      	mov	r0, r3
- 800178a:	f7ff fe29 	bl	80013e0 <_ZN3PIDC1Effffff>
+ 8001784:	f107 030c 	add.w	r3, r7, #12
+ 8001788:	eddf 2a4c 	vldr	s5, [pc, #304]	; 80018bc <PID2Node+0x188>
+ 800178c:	ed9f 2a4c 	vldr	s4, [pc, #304]	; 80018c0 <PID2Node+0x18c>
+ 8001790:	eddf 1a4c 	vldr	s3, [pc, #304]	; 80018c4 <PID2Node+0x190>
+ 8001794:	eeb1 1a00 	vmov.f32	s2, #16	; 0x40800000  4.0
+ 8001798:	eddf 0a4b 	vldr	s1, [pc, #300]	; 80018c8 <PID2Node+0x194>
+ 800179c:	ed9f 0a4b 	vldr	s0, [pc, #300]	; 80018cc <PID2Node+0x198>
+ 80017a0:	4618      	mov	r0, r3
+ 80017a2:	f7ff fe1d 	bl	80013e0 <_ZN3PIDC1Effffff>
 
 	//float current_angle = 0;
 	if(robot_info_handler->angle_2 == 0){
- 800178e:	687b      	ldr	r3, [r7, #4]
- 8001790:	edd3 7a01 	vldr	s15, [r3, #4]
- 8001794:	eef5 7a40 	vcmp.f32	s15, #0.0
- 8001798:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
- 800179c:	d11a      	bne.n	80017d4 <PID2Node+0xb8>
+ 80017a6:	687b      	ldr	r3, [r7, #4]
+ 80017a8:	edd3 7a01 	vldr	s15, [r3, #4]
+ 80017ac:	eef5 7a40 	vcmp.f32	s15, #0.0
+ 80017b0:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+ 80017b4:	d11a      	bne.n	80017ec <PID2Node+0xb8>
 		// Check if the hall is in the initial position
 		if(HAL_GPIO_ReadPin(GPIOD, GPIO_PIN_6) == GPIO_PIN_RESET){
- 800179e:	2140      	movs	r1, #64	; 0x40
- 80017a0:	484a      	ldr	r0, [pc, #296]	; (80018cc <PID2Node+0x1b0>)
- 80017a2:	f001 fcc3 	bl	800312c <HAL_GPIO_ReadPin>
- 80017a6:	4603      	mov	r3, r0
- 80017a8:	2b00      	cmp	r3, #0
- 80017aa:	bf0c      	ite	eq
- 80017ac:	2301      	moveq	r3, #1
- 80017ae:	2300      	movne	r3, #0
- 80017b0:	b2db      	uxtb	r3, r3
- 80017b2:	2b00      	cmp	r3, #0
- 80017b4:	d009      	beq.n	80017ca <PID2Node+0xae>
+ 80017b6:	2140      	movs	r1, #64	; 0x40
+ 80017b8:	4845      	ldr	r0, [pc, #276]	; (80018d0 <PID2Node+0x19c>)
+ 80017ba:	f001 fcb7 	bl	800312c <HAL_GPIO_ReadPin>
+ 80017be:	4603      	mov	r3, r0
+ 80017c0:	2b00      	cmp	r3, #0
+ 80017c2:	bf0c      	ite	eq
+ 80017c4:	2301      	moveq	r3, #1
+ 80017c6:	2300      	movne	r3, #0
+ 80017c8:	b2db      	uxtb	r3, r3
+ 80017ca:	2b00      	cmp	r3, #0
+ 80017cc:	d009      	beq.n	80017e2 <PID2Node+0xae>
 			current_angle_2 = 0;
- 80017b6:	4b46      	ldr	r3, [pc, #280]	; (80018d0 <PID2Node+0x1b4>)
- 80017b8:	f04f 0200 	mov.w	r2, #0
- 80017bc:	601a      	str	r2, [r3, #0]
+ 80017ce:	4b41      	ldr	r3, [pc, #260]	; (80018d4 <PID2Node+0x1a0>)
+ 80017d0:	f04f 0200 	mov.w	r2, #0
+ 80017d4:	601a      	str	r2, [r3, #0]
 			encoder2.resetTicksCounter();
- 80017be:	f107 0354 	add.w	r3, r7, #84	; 0x54
- 80017c2:	4618      	mov	r0, r3
- 80017c4:	f7ff fb8c 	bl	8000ee0 <_ZN7Encoder17resetTicksCounterEv>
- 80017c8:	e004      	b.n	80017d4 <PID2Node+0xb8>
+ 80017d6:	f107 0354 	add.w	r3, r7, #84	; 0x54
+ 80017da:	4618      	mov	r0, r3
+ 80017dc:	f7ff fb80 	bl	8000ee0 <_ZN7Encoder17resetTicksCounterEv>
+ 80017e0:	e004      	b.n	80017ec <PID2Node+0xb8>
 		}
 		else	motor2.goHomePosition();
- 80017ca:	f107 0364 	add.w	r3, r7, #100	; 0x64
- 80017ce:	4618      	mov	r0, r3
- 80017d0:	f7ff fc66 	bl	80010a0 <_ZN5Motor14goHomePositionEv>
+ 80017e2:	f107 0364 	add.w	r3, r7, #100	; 0x64
+ 80017e6:	4618      	mov	r0, r3
+ 80017e8:	f7ff fc5a 	bl	80010a0 <_ZN5Motor14goHomePositionEv>
 	}
 
 	while(1){
 		if(hall_2_flag == 1){
- 80017d4:	4b3f      	ldr	r3, [pc, #252]	; (80018d4 <PID2Node+0x1b8>)
- 80017d6:	681b      	ldr	r3, [r3, #0]
- 80017d8:	2b01      	cmp	r3, #1
- 80017da:	d10b      	bne.n	80017f4 <PID2Node+0xd8>
+ 80017ec:	4b3a      	ldr	r3, [pc, #232]	; (80018d8 <PID2Node+0x1a4>)
+ 80017ee:	681b      	ldr	r3, [r3, #0]
+ 80017f0:	2b01      	cmp	r3, #1
+ 80017f2:	d10b      	bne.n	800180c <PID2Node+0xd8>
 			hall_2_flag = 0;
- 80017dc:	4b3d      	ldr	r3, [pc, #244]	; (80018d4 <PID2Node+0x1b8>)
- 80017de:	2200      	movs	r2, #0
- 80017e0:	601a      	str	r2, [r3, #0]
+ 80017f4:	4b38      	ldr	r3, [pc, #224]	; (80018d8 <PID2Node+0x1a4>)
+ 80017f6:	2200      	movs	r2, #0
+ 80017f8:	601a      	str	r2, [r3, #0]
 			motor2.stopMotor();
- 80017e2:	f107 0364 	add.w	r3, r7, #100	; 0x64
- 80017e6:	4618      	mov	r0, r3
- 80017e8:	f7ff fcf2 	bl	80011d0 <_ZN5Motor9stopMotorEv>
+ 80017fa:	f107 0364 	add.w	r3, r7, #100	; 0x64
+ 80017fe:	4618      	mov	r0, r3
+ 8001800:	f7ff fce6 	bl	80011d0 <_ZN5Motor9stopMotorEv>
 			current_angle_2 = 0;
- 80017ec:	4b38      	ldr	r3, [pc, #224]	; (80018d0 <PID2Node+0x1b4>)
- 80017ee:	f04f 0200 	mov.w	r2, #0
- 80017f2:	601a      	str	r2, [r3, #0]
+ 8001804:	4b33      	ldr	r3, [pc, #204]	; (80018d4 <PID2Node+0x1a0>)
+ 8001806:	f04f 0200 	mov.w	r2, #0
+ 800180a:	601a      	str	r2, [r3, #0]
 		}
-		pulses_2 = encoder2.getPulses();
- 80017f4:	f107 0354 	add.w	r3, r7, #84	; 0x54
- 80017f8:	4618      	mov	r0, r3
- 80017fa:	f7ff fb57 	bl	8000eac <_ZN7Encoder9getPulsesEv>
- 80017fe:	eef0 7a40 	vmov.f32	s15, s0
- 8001802:	4b35      	ldr	r3, [pc, #212]	; (80018d8 <PID2Node+0x1bc>)
- 8001804:	edc3 7a00 	vstr	s15, [r3]
+		//pulses_2 = encoder2.getPulses();
 		current_angle_2 = encoder2.getAngle();
- 8001808:	f107 0354 	add.w	r3, r7, #84	; 0x54
- 800180c:	4618      	mov	r0, r3
- 800180e:	f7ff fb0b 	bl	8000e28 <_ZN7Encoder8getAngleEv>
- 8001812:	eef0 7a40 	vmov.f32	s15, s0
- 8001816:	4b2e      	ldr	r3, [pc, #184]	; (80018d0 <PID2Node+0x1b4>)
- 8001818:	edc3 7a00 	vstr	s15, [r3]
+ 800180c:	f107 0354 	add.w	r3, r7, #84	; 0x54
+ 8001810:	4618      	mov	r0, r3
+ 8001812:	f7ff fb09 	bl	8000e28 <_ZN7Encoder8getAngleEv>
+ 8001816:	eef0 7a40 	vmov.f32	s15, s0
+ 800181a:	4b2e      	ldr	r3, [pc, #184]	; (80018d4 <PID2Node+0x1a0>)
+ 800181c:	edc3 7a00 	vstr	s15, [r3]
 		output_pid_2 = pid2.updatePID(robot_info_handler->angle_2, current_angle_2);
- 800181c:	687b      	ldr	r3, [r7, #4]
- 800181e:	edd3 7a01 	vldr	s15, [r3, #4]
- 8001822:	4b2b      	ldr	r3, [pc, #172]	; (80018d0 <PID2Node+0x1b4>)
- 8001824:	ed93 7a00 	vldr	s14, [r3]
- 8001828:	f107 030c 	add.w	r3, r7, #12
- 800182c:	eef0 0a47 	vmov.f32	s1, s14
- 8001830:	eeb0 0a67 	vmov.f32	s0, s15
- 8001834:	4618      	mov	r0, r3
- 8001836:	f7ff fe11 	bl	800145c <_ZN3PID9updatePIDEff>
- 800183a:	eef0 7a40 	vmov.f32	s15, s0
- 800183e:	4b27      	ldr	r3, [pc, #156]	; (80018dc <PID2Node+0x1c0>)
- 8001840:	edc3 7a00 	vstr	s15, [r3]
+ 8001820:	687b      	ldr	r3, [r7, #4]
+ 8001822:	edd3 7a01 	vldr	s15, [r3, #4]
+ 8001826:	4b2b      	ldr	r3, [pc, #172]	; (80018d4 <PID2Node+0x1a0>)
+ 8001828:	ed93 7a00 	vldr	s14, [r3]
+ 800182c:	f107 030c 	add.w	r3, r7, #12
+ 8001830:	eef0 0a47 	vmov.f32	s1, s14
+ 8001834:	eeb0 0a67 	vmov.f32	s0, s15
+ 8001838:	4618      	mov	r0, r3
+ 800183a:	f7ff fe0f 	bl	800145c <_ZN3PID9updatePIDEff>
+ 800183e:	eef0 7a40 	vmov.f32	s15, s0
+ 8001842:	4b26      	ldr	r3, [pc, #152]	; (80018dc <PID2Node+0x1a8>)
+ 8001844:	edc3 7a00 	vstr	s15, [r3]
 		if(output_pid_2 > 0) motor2.turnLeft(output_pid_2);
- 8001844:	4b25      	ldr	r3, [pc, #148]	; (80018dc <PID2Node+0x1c0>)
- 8001846:	edd3 7a00 	vldr	s15, [r3]
- 800184a:	eef5 7ac0 	vcmpe.f32	s15, #0.0
- 800184e:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
- 8001852:	dd0c      	ble.n	800186e <PID2Node+0x152>
- 8001854:	4b21      	ldr	r3, [pc, #132]	; (80018dc <PID2Node+0x1c0>)
- 8001856:	edd3 7a00 	vldr	s15, [r3]
- 800185a:	eefc 7ae7 	vcvt.u32.f32	s15, s15
- 800185e:	f107 0364 	add.w	r3, r7, #100	; 0x64
- 8001862:	ee17 1a90 	vmov	r1, s15
- 8001866:	4618      	mov	r0, r3
- 8001868:	f7ff fb76 	bl	8000f58 <_ZN5Motor8turnLeftEm>
- 800186c:	e015      	b.n	800189a <PID2Node+0x17e>
+ 8001848:	4b24      	ldr	r3, [pc, #144]	; (80018dc <PID2Node+0x1a8>)
+ 800184a:	edd3 7a00 	vldr	s15, [r3]
+ 800184e:	eef5 7ac0 	vcmpe.f32	s15, #0.0
+ 8001852:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+ 8001856:	dd0c      	ble.n	8001872 <PID2Node+0x13e>
+ 8001858:	4b20      	ldr	r3, [pc, #128]	; (80018dc <PID2Node+0x1a8>)
+ 800185a:	edd3 7a00 	vldr	s15, [r3]
+ 800185e:	eefc 7ae7 	vcvt.u32.f32	s15, s15
+ 8001862:	f107 0364 	add.w	r3, r7, #100	; 0x64
+ 8001866:	ee17 1a90 	vmov	r1, s15
+ 800186a:	4618      	mov	r0, r3
+ 800186c:	f7ff fb74 	bl	8000f58 <_ZN5Motor8turnLeftEm>
+ 8001870:	e015      	b.n	800189e <PID2Node+0x16a>
 		else if (output_pid_2 < 0) motor2.turnRight(-output_pid_2);
- 800186e:	4b1b      	ldr	r3, [pc, #108]	; (80018dc <PID2Node+0x1c0>)
- 8001870:	edd3 7a00 	vldr	s15, [r3]
- 8001874:	eef5 7ac0 	vcmpe.f32	s15, #0.0
- 8001878:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
- 800187c:	d50d      	bpl.n	800189a <PID2Node+0x17e>
- 800187e:	4b17      	ldr	r3, [pc, #92]	; (80018dc <PID2Node+0x1c0>)
- 8001880:	edd3 7a00 	vldr	s15, [r3]
- 8001884:	eef1 7a67 	vneg.f32	s15, s15
- 8001888:	eefc 7ae7 	vcvt.u32.f32	s15, s15
- 800188c:	f107 0364 	add.w	r3, r7, #100	; 0x64
- 8001890:	ee17 1a90 	vmov	r1, s15
- 8001894:	4618      	mov	r0, r3
- 8001896:	f7ff fbb1 	bl	8000ffc <_ZN5Motor9turnRightEm>
+ 8001872:	4b1a      	ldr	r3, [pc, #104]	; (80018dc <PID2Node+0x1a8>)
+ 8001874:	edd3 7a00 	vldr	s15, [r3]
+ 8001878:	eef5 7ac0 	vcmpe.f32	s15, #0.0
+ 800187c:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+ 8001880:	d50d      	bpl.n	800189e <PID2Node+0x16a>
+ 8001882:	4b16      	ldr	r3, [pc, #88]	; (80018dc <PID2Node+0x1a8>)
+ 8001884:	edd3 7a00 	vldr	s15, [r3]
+ 8001888:	eef1 7a67 	vneg.f32	s15, s15
+ 800188c:	eefc 7ae7 	vcvt.u32.f32	s15, s15
+ 8001890:	f107 0364 	add.w	r3, r7, #100	; 0x64
+ 8001894:	ee17 1a90 	vmov	r1, s15
+ 8001898:	4618      	mov	r0, r3
+ 800189a:	f7ff fbaf 	bl	8000ffc <_ZN5Motor9turnRightEm>
 		osDelay(PID_UPDATE_TIME_mS);
- 800189a:	203c      	movs	r0, #60	; 0x3c
- 800189c:	f004 f983 	bl	8005ba6 <osDelay>
+ 800189e:	203c      	movs	r0, #60	; 0x3c
+ 80018a0:	f004 f981 	bl	8005ba6 <osDelay>
 		if(hall_2_flag == 1){
- 80018a0:	e798      	b.n	80017d4 <PID2Node+0xb8>
- 80018a2:	bf00      	nop
- 80018a4:	080082e0 	.word	0x080082e0
- 80018a8:	080082e8 	.word	0x080082e8
- 80018ac:	200041c0 	.word	0x200041c0
- 80018b0:	469d3e00 	.word	0x469d3e00
- 80018b4:	200040e8 	.word	0x200040e8
- 80018b8:	3d75c28f 	.word	0x3d75c28f
- 80018bc:	c47a0000 	.word	0xc47a0000
- 80018c0:	447a0000 	.word	0x447a0000
- 80018c4:	3dcccccd 	.word	0x3dcccccd
- 80018c8:	43480000 	.word	0x43480000
- 80018cc:	40020c00 	.word	0x40020c00
- 80018d0:	2000005c 	.word	0x2000005c
+ 80018a4:	e7a2      	b.n	80017ec <PID2Node+0xb8>
+ 80018a6:	bf00      	nop
+ 80018a8:	080082e0 	.word	0x080082e0
+ 80018ac:	080082e8 	.word	0x080082e8
+ 80018b0:	200041c0 	.word	0x200041c0
+ 80018b4:	469d3e00 	.word	0x469d3e00
+ 80018b8:	200040e8 	.word	0x200040e8
+ 80018bc:	3d75c28f 	.word	0x3d75c28f
+ 80018c0:	c47a0000 	.word	0xc47a0000
+ 80018c4:	447a0000 	.word	0x447a0000
+ 80018c8:	3dcccccd 	.word	0x3dcccccd
+ 80018cc:	43480000 	.word	0x43480000
+ 80018d0:	40020c00 	.word	0x40020c00
  80018d4:	20000060 	.word	0x20000060
  80018d8:	20000064 	.word	0x20000064
- 80018dc:	20000058 	.word	0x20000058
+ 80018dc:	2000005c 	.word	0x2000005c
 
 080018e0 <PID3Node>:
 
@@ -2989,7 +2991,7 @@ void startPID2(void const * argument)
   /* USER CODE BEGIN startPID2 */
 	PID2Node(&robot_info_handler);
  8001c30:	4803      	ldr	r0, [pc, #12]	; (8001c40 <startPID2+0x18>)
- 8001c32:	f7ff fd73 	bl	800171c <PID2Node>
+ 8001c32:	f7ff fd7f 	bl	8001734 <PID2Node>
   /* Infinite loop */
   for(;;)
   {
@@ -3075,12 +3077,12 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
  8001c9c:	601a      	str	r2, [r3, #0]
 		hall_3_flag = 1;
 	}
-	else if(GPIO_Pin == GPIO_PIN_7){						// Change PIN for hall 1
+	else if(GPIO_Pin == GPIO_PIN_7){
 		hall_1_flag = 1;
 	}
 }
  8001c9e:	e00c      	b.n	8001cba <HAL_GPIO_EXTI_Callback+0x32>
-	else if(GPIO_Pin == GPIO_PIN_5){						// Change for PIN for hall 3
+	else if(GPIO_Pin == GPIO_PIN_5){
  8001ca0:	88fb      	ldrh	r3, [r7, #6]
  8001ca2:	2b20      	cmp	r3, #32
  8001ca4:	d103      	bne.n	8001cae <HAL_GPIO_EXTI_Callback+0x26>
@@ -3090,7 +3092,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
  8001caa:	601a      	str	r2, [r3, #0]
 }
  8001cac:	e005      	b.n	8001cba <HAL_GPIO_EXTI_Callback+0x32>
-	else if(GPIO_Pin == GPIO_PIN_7){						// Change PIN for hall 1
+	else if(GPIO_Pin == GPIO_PIN_7){
  8001cae:	88fb      	ldrh	r3, [r7, #6]
  8001cb0:	2b80      	cmp	r3, #128	; 0x80
  8001cb2:	d102      	bne.n	8001cba <HAL_GPIO_EXTI_Callback+0x32>
@@ -3105,7 +3107,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
  8001cc0:	f85d 7b04 	ldr.w	r7, [sp], #4
  8001cc4:	4770      	bx	lr
  8001cc6:	bf00      	nop
- 8001cc8:	20000060 	.word	0x20000060
+ 8001cc8:	20000064 	.word	0x20000064
  8001ccc:	20000070 	.word	0x20000070
  8001cd0:	20000054 	.word	0x20000054
 
@@ -4511,9 +4513,9 @@ void MX_TIM4_Init(void)
  800244c:	4b1d      	ldr	r3, [pc, #116]	; (80024c4 <MX_TIM4_Init+0xa0>)
  800244e:	2200      	movs	r2, #0
  8002450:	609a      	str	r2, [r3, #8]
-  htim4.Init.Period = 20127;
+  htim4.Init.Period = 65535;
  8002452:	4b1c      	ldr	r3, [pc, #112]	; (80024c4 <MX_TIM4_Init+0xa0>)
- 8002454:	f644 629f 	movw	r2, #20127	; 0x4e9f
+ 8002454:	f64f 72ff 	movw	r2, #65535	; 0xffff
  8002458:	60da      	str	r2, [r3, #12]
   htim4.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
  800245a:	4b1a      	ldr	r3, [pc, #104]	; (80024c4 <MX_TIM4_Init+0xa0>)
@@ -4535,8 +4537,8 @@ void MX_TIM4_Init(void)
   sConfig.IC1Prescaler = TIM_ICPSC_DIV1;
  8002472:	2300      	movs	r3, #0
  8002474:	61bb      	str	r3, [r7, #24]
-  sConfig.IC1Filter = 15;
- 8002476:	230f      	movs	r3, #15
+  sConfig.IC1Filter = 0;
+ 8002476:	2300      	movs	r3, #0
  8002478:	61fb      	str	r3, [r7, #28]
   sConfig.IC2Polarity = TIM_ICPOLARITY_RISING;
  800247a:	2300      	movs	r3, #0
@@ -4547,8 +4549,8 @@ void MX_TIM4_Init(void)
   sConfig.IC2Prescaler = TIM_ICPSC_DIV1;
  8002482:	2300      	movs	r3, #0
  8002484:	62bb      	str	r3, [r7, #40]	; 0x28
-  sConfig.IC2Filter = 15;
- 8002486:	230f      	movs	r3, #15
+  sConfig.IC2Filter = 0;
+ 8002486:	2300      	movs	r3, #0
  8002488:	62fb      	str	r3, [r7, #44]	; 0x2c
   if (HAL_TIM_Encoder_Init(&htim4, &sConfig) != HAL_OK)
  800248a:	f107 030c 	add.w	r3, r7, #12

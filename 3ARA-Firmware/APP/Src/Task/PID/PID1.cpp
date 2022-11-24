@@ -8,6 +8,7 @@
 float output_pid_1=0;
 float current_angle_1 = 0;
 int hall_1_flag = 0;
+float pulses_1 = 0;
 
 void PID1Node(RobotInfoHandler *robot_info_handler){
 
@@ -42,19 +43,14 @@ void PID1Node(RobotInfoHandler *robot_info_handler){
 			motor1.stopMotor();
 			current_angle_1 = 0;
 		}
+		pulses_1 = encoder1.getPulses();
 		current_angle_1 = encoder1.getAngle();
 		output_pid_1 = pid1.updatePID(robot_info_handler->angle_1, current_angle_1);
-		if(output_pid_1 > 0) motor1.turnRight(output_pid_1);
+		if(output_pid_1 > 0){
+			motor1.turnRight(output_pid_1);
+		}
 		else if (output_pid_1 < 0) motor1.turnLeft(-output_pid_1);
 		osDelay(PID_UPDATE_TIME_mS);
 	}
 }
 
-/*
-// Callback function for external gpio interrupt
-void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
-	if(GPIO_Pin == GPIO_PIN_7){						// Change PIN for hall 1
-		hall_1_flag = 1;
-	}
-}
-*/
