@@ -41,8 +41,11 @@ void PID3Node(RobotInfoHandler *robot_info_handler){
 	while(1){
 		if(hall_3_flag == 1){
 			hall_3_flag = 0;
-			motor3.stopMotor();
-			current_angle_3 = 0;
+			osDelay(5);
+			if(HAL_GPIO_ReadPin(GPIOD, GPIO_PIN_5) == GPIO_PIN_RESET){
+				motor3.stopMotor();
+				current_angle_3 = 0;
+			}
 		}
 		pulses_3 = encoder3.getPulses();
 		current_angle_3 = encoder3.getAngle();

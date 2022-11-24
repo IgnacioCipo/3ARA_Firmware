@@ -42,7 +42,6 @@ void PID1Node(RobotInfoHandler *robot_info_handler){
 			hall_1_flag = 0;
 			osDelay(5);
 			if(HAL_GPIO_ReadPin(GPIOD, GPIO_PIN_7) == GPIO_PIN_RESET){
-				hall_1_flag = 0;
 				motor1.stopMotor();
 				current_angle_1 = 0;
 			}

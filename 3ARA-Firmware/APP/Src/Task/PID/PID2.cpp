@@ -42,8 +42,11 @@ void PID2Node(RobotInfoHandler *robot_info_handler){
 	while(1){
 		if(hall_2_flag == 1){
 			hall_2_flag = 0;
-			motor2.stopMotor();
-			current_angle_2 = 0;
+			osDelay(5);
+			if(HAL_GPIO_ReadPin(GPIOD, GPIO_PIN_6) == GPIO_PIN_RESET){
+				motor2.stopMotor();
+				current_angle_2 = 0;
+			}
 		}
 		//pulses_2 = encoder2.getPulses();
 		current_angle_2 = encoder2.getAngle();
