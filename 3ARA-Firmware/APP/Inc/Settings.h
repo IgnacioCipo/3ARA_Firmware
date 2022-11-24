@@ -26,9 +26,9 @@
 #define PID_UPDATE_TIME_mS 60			// Time required for re calculate PID in milliseconds
 
 // PID 1 ctes
-#define KI_CONST_1 2
+#define KI_CONST_1 4
 #define KD_CONST_1 0.1
-#define KP_CONST_1 20
+#define KP_CONST_1 200
 // PID 2 ctes
 #define KI_CONST_2 4
 #define KD_CONST_2 0.1
