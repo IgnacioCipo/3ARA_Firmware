@@ -92,6 +92,8 @@ void Motor::stopMotor(){
 	//HAL_GPIO_WritePin(gpio_port_2, gpio_pin_2, GPIO_PIN_SET);
 	switch(channel){
 			case TIM_CHANNEL_1:
+				HAL_GPIO_WritePin(gpio_port_1, gpio_pin_1, GPIO_PIN_SET);
+				HAL_GPIO_WritePin(gpio_port_2, gpio_pin_2, GPIO_PIN_SET);
 				timer->Instance -> CCR1 = 0;
 				__HAL_TIM_SetCounter(&ENCODER_2_TIMER, 32767);
 				break;
